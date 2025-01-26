@@ -1,145 +1,92 @@
-<u><h2>Documentation for `scraper.py`</h2></u>
+## Documentation for `scraper.py`
 
-<h3>Overview</h3>
+### Overview
+The `scraper.py` script is designed to scrape cricket player statistics from ESPN CricInfo. It extracts the player's batting, bowling, all-rounder, and fielding stats along with personal information such as the player's country, age, and playing role. This script uses **Selenium** for web scraping, running in _headless mode_ for efficiency.
 
-The `scraper.py` script defines the "ReviewScraper" class, which is used to scrape customer reviews from a website. It handles:
+### Features
+- Scrapes player statistics for batting, bowling, all-round performance, and fielding.
+- Extracts personal information about the player like full name, age, country, and playing role.
+- Uses Selenium WebDriver in headless mode for silent and efficient web scraping.
 
-1. Fetching HTML content from specified URLs.
-2. Parsing customer review data, including metadata and star ratings.
-3. Handling errors and incomplete data gracefully.
-4. Combining the scraped data into a well-structured pandas DataFrame.
+## Requirements
+- Python 3.x
+- Libraries:
+  - `selenium`
+  - `webdriver-manager`
+  - `pandas`
+- Google Chrome installed with the corresponding version of Chromedriver.
 
-<h3>Requirements</h3>
-The following Python libraries are required:
+The libraries can also be found in the `requirements.txt` file in the root project folder. 
+  
+Install the required libraries using pip:
+        
+        pip install selenium webdriver-manager pandas
 
-1. `requests`: For sending HTTP requests to fetch webpage content.
-2. `BeautifulSoup` from bs4: For parsing and navigating HTML content.
-3. `pandas`: For structuring and manipulating tabular data.
-4. `time`: For recording the time taken for operations.
+### Usage
+1. Initialize the `Cricketer_Stats_Scraper` class with the player's name.
+2. Fetch the desired stats by calling `get_player_stats()`.
+3. Access the scraped data in the `battingstats`, `bowlingstats`, `allroundstats`, `fieldingstats`, and player_info variables.
 
-<h3>Class Definition</h3>
+#### Example usage
 
-class `ReviewScraper`: The class encapsulates all functionality for scraping and processing customer reviews.
+    from scraper import Cricketer_Stats_Scraper
 
-<b>1. Class Constructor</b>
+#### Initialize the scraper for a specific player
+    scraper = Cricketer_Stats_Scraper("Virat Kohli")
 
-        def __init__(self, base_url):
-        """
-        Initialize the ReviewScraper with the base URL and an empty DataFrame.
-        Args:
-        base_url (str): The base URL of the review website.
-        """
+#### Fetch all stats (batting, bowling, fielding, all-round)
+    scraper.get_player_stats(stats_type="all")
 
-<u>Purpose</u>: Sets up the initial state for the scraper, including:<ul>
-    <li> base_url: Base URL of the review site.
-    <li>data: Placeholder for the final scraped DataFrame.
-    <li>soup: A BeautifulSoup object for HTML parsing, initially None.</ul>
+#### Print the fetched data
+    print("Batting Stats:", scraper.battingstats)
+    print("Bowling Stats:", scraper.bowlingstats)
+    print("Allround Stats:", scraper.allroundstats)
+    print("Fielding Stats:", scraper.fieldingstats)
 
-**2. Method: fetch_html**
+#### Access personal player info
+    print("Player Info:", scraper.player_info)
 
-        def fetch_html(self, url):
-            """
-            Fetch the HTML content of a given URL and initialize the soup object.
-            Args:
-                url (str): The URL to fetch.
-            Returns:
-                str: The HTML content of the page.
-            """
-<u>Purpose</u>: Fetches the HTML content of a given URL and initializes the soup object for parsing.
+### Methods
 
-<u>Error Handling</u>: If the request fails (e.g., network issue or server error), it logs the error and sets soup to None.
+1. __`__init__(self,player_name)`__
 
-**3. Method: extract_review_data**
+__Description__: Initializes the `Cricketer_Stats_Scraper` object with the player's name. Sets up the WebDriver, and automatically calls `get_player_url()` to fetch the player's URL and ID.
 
-        def extract_review_data(self, tag, attr, value):
-            """
-            Extract specific review data (categorical or star ratings) from the soup object.
-            Args:
-                tag (str): HTML tag to search for.
-                attr (str): Attribute to locate the header within the review-stats section.
-                value (str): Class name or type of value to extract (e.g., "stars").
-            Returns:
-                tuple: Column name and list of values.
-            """
+__Parameters__:
+- `player_name (str)`: The name of the cricketer whose stats will be scraped.
 
-<u>Purpose</u>: Extracts specific review data, including categorical data (e.g., Aircraft, Route) and star ratings (e.g., Seat Comfort, Cabin).
-Searches within the review-stats section of the HTML to narrow the scope.
+__Returns__: None; updates the instance variables `player_id` and `player_url`. 
 
-<u>Logic</u>: Handles both normal data (value) and star ratings (stars) differently.
-Provides default values (None) for missing elements to ensure consistency.
+2. __`get_player_url()`__
 
-**4. Method: parse_reviews**
+__Description__: Extracts the player URL and player ID by searching the player's name on ESPN CricInfo.
 
-        def parse_reviews(self):
-            """
-            Parse reviews and associated metadata from the soup object.
-            Returns:
-                pd.DataFrame: DataFrame containing extracted reviews and metadata.
-            """
+__Returns__: None, updates the `player_url` and `player_id` instance variables.
 
-Purpose: Combines data from various sections of the HTML (titles, metadata, reviews, star ratings) into a structured DataFrame.
+3. __`extract_inns_data(record_type)`__
 
-<u>Key Steps</u>:
+__Description__: Scrapes innings data (batting, bowling, fielding, or all-round stats) for the player based on the provided record_type.
 
-<ol type=a>
-<li> Extracts primary review data (e.g., Review Title, Review Meta, Reviews, Overall Rating).</li>
-<li>Extracts additional metadata (e.g., Aircraft, Route, Travel Type).
-<li>Extracts star ratings (e.g., Seat Comfort, Cabin, Food).
-<li>Combines all data into a pandas DataFrame.</li></ol>
+__Parameters__: 
+- `record_type (str)` - Type of stats to scrape ("batting","bowling","fielding", "allround").
 
-<u>Error Handling</u>: Logs and returns an empty DataFrame if an error occurs during parsing.
+__Returns__: A pandas DataFrame containing the player's innings data, based on record type.
 
-**5. Method: get_total_pages**
+4. __`extract_player_info()`__
 
-    def get_total_pages(self):
-        """
-        Extract the total number of pages from the soup object.
-        Returns:
-            int: Total number of pages.
-        """
-<u>Purpose</u>: Determines the total number of review pages from the pagination section of the HTML.
+__Description__: Extracts the personal information of the player (full name, country, age, and playing role).
 
-<u>Error Handling</u>: Defaults to 1 page if the pagination structure is missing or incorrectly parsed.
+__Returns__: A pandas DataFrame containing the player's personal information.
 
-**6. Method: scrape_all_reviews**
+5. __`get_player_stats(stats_type="all")`__
 
-    def scrape_all_reviews(self, pages=None):
-        """
-        Scrape reviews across specified or all pages, recording time taken for each page.
-        Args:
-            pages (int, optional): Number of pages to scrape. Defaults to all pages.
-        Returns:
-            pd.DataFrame: Combined DataFrame of all reviews.
-        """
+___Description__: Fetches stats based on the stats_type argument.
 
-<u>Purpose</u>: Orchestrates the scraping process by iterating over multiple pages.
-Combines data from all scraped pages into a single DataFrame.
+__Parameters__: 
+- `stats_type (str)` - Stats to fetch. Can be "batting", "bowling", "allround", "fielding", or "all" to fetch all stats (default).
 
-<u>Key Steps</u>:<ol type=a>
-<li>Fetches the first page to determine the total number of pages.
-<li>Iteratively fetches and parses each page, logging time taken for each.
-<li>Appends parsed data to the data attribute.</li></ol>
+__Returns__: None; updates the instance variables `battingstats`, `bowlingstats`, `allroundstats`, `fieldingstats`, and `player_info`.
 
-<u>Error Handling</u>: If a page fails to scrape, logs the error and continues with the next page.
+6.__` __del__()`__
 
-<h3>How to Use the ReviewScraper Class</h3>
-
-<ol>
-<li>Initialize the Scraper:</li>
-
-        base_url = "https://www.airlinequality.com/airline-reviews/british-airways"
-        scraper = ReviewScraper(base_url)
-
-<li>Scrape Reviews:
-
-<ol type=a>
-<li>Scrape all pages:</li>
-
-    all_reviews = scraper.scrape_all_reviews()
-    print(all_reviews.head())
-
-<li>Scrape a limited number of pages:</li>
-
-    limited_reviews = scraper.scrape_all_reviews(pages=5)
-    print(limited_reviews.head())
-
+__Description__: Destructor of the class. It cleans up the WebDriver instance after the scraping process is complete by closing the browser window.
