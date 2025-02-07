@@ -16,16 +16,16 @@ else:
 
 
 # export the player's personal info
-player.player_info.to_csv("data/player_personal_info.csv")
+player.player_info.to_csv("data/player_personal_info.csv", index=False)
 print(f"Player personal info exported to data/player_personal_info.csv")
 
-player.battingstats.to_csv("data/player_batting_stats.csv")
+player.battingstats.to_csv("data/player_batting_stats.csv", index=False)
 print(f"Player batting stats exported to data/player_batting_stats.csv")
 
-player.bowlingstats.to_csv("data/player_bowling_stats.csv")
+player.bowlingstats.to_csv("data/player_bowling_stats.csv", index=False)
 print(f"Player bowling stats exported to data/player_bowling_stats.csv")
 
-player.fieldingstats.to_csv("data/player_fielding_stats.csv")
+player.fieldingstats.to_csv("data/player_fielding_stats.csv", index=False)
 print(f"Player fielding stats exported to data/player_fielding_stats.csv")
 
 
