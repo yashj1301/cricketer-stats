@@ -1,0 +1,11 @@
+V2
+
+1. player photograph - extracted from player_url, and stored in player_info. 
+2. grounds information - extracted Ground, Home country, location and matched from other data; code already made in check.ipynb. Find a way to optimize it. 
+3. Modify the code cleaning - remove unnecessary columns based on player's role. Eg. for batters, remove wicketkeeper columns etc.  
+
+V3
+1. Documentation and proper linting for transformer.py and loader.py 
+2. Development container for each project. 
+3. Inheritance between the modules.
+

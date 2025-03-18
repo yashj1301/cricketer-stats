@@ -1,0 +1,659 @@
+Match ID,Start Date,Format,Inns,Pos,Overs,Mdns,Runs,Wkts,Econ,Opposition,Location
+#2742,2008-08-18,ODI,2,,,,,,,Sri Lanka,Dambulla
+#2745,2008-08-20,ODI,1,,,,,,,Sri Lanka,Dambulla
+#2750,2008-08-24,ODI,2,,,,,,,Sri Lanka,Colombo
+#2755,2008-08-27,ODI,2,,,,,,,Sri Lanka,Colombo
+#2756,2008-08-29,ODI,1,,,,,,,Sri Lanka,Colombo
+#2889,2009-09-14,ODI,2,,,,,,,Sri Lanka,Colombo
+#2898,2009-09-26,ODI,1,4,3.0,0,21,0,7.00,Pakistan,Centurion
+#2901,2009-09-28,ODI,1,,,,,,,Australia,Centurion
+#2904,2009-09-30,ODI,1,,,,,,,West Indies,Johannesburg
+#2913,2009-10-25,ODI,1,,,,,,,Australia,Vadodara
+#2919,2009-11-02,ODI,1,,,,,,,Australia,Mohali
+#2932,2009-12-15,ODI,2,,,,,,,Sri Lanka,Rajkot
+#2933,2009-12-18,ODI,2,,,,,,,Sri Lanka,Nagpur
+#2935,2009-12-24,ODI,1,,,,,,,Sri Lanka,Kolkata
+#2936,2009-12-27,ODI,1,,,,,,,Sri Lanka,Delhi
+#2938,2010-01-05,ODI,2,,,,,,,Sri Lanka,Mirpur
+#2939,2010-01-07,ODI,1,,,,,,,Bangladesh,Mirpur
+#2941,2010-01-10,ODI,1,,,,,,,Sri Lanka,Mirpur
+#2942,2010-01-11,ODI,1,,,,,,,Bangladesh,Mirpur
+#2943,2010-01-13,ODI,2,3,1.4,0,12,0,7.20,Sri Lanka,Mirpur
+#2961,2010-02-21,ODI,2,,,,,,,South Africa,Jaipur
+#2962,2010-02-24,ODI,2,,,,,,,South Africa,Gwalior
+#2963,2010-02-27,ODI,1,6,2.0,0,11,0,5.50,South Africa,Ahmedabad
+#2981,2010-05-28,ODI,2,,,,,,,Zimbabwe,Bulawayo
+#2983,2010-05-30,ODI,1,,,,,,,Sri Lanka,Bulawayo
+#2986,2010-06-03,ODI,2,,,,,,,Zimbabwe,Harare
+#2988,2010-06-05,ODI,2,,,,,,,Sri Lanka,Harare
+#182,2010-06-12,T20I,1,,,,,,,Zimbabwe,Harare
+#183,2010-06-13,T20I,1,,,,,,,Zimbabwe,Harare
+#2993,2010-06-16,ODI,1,,,,,,,Bangladesh,Dambulla
+#2996,2010-06-19,ODI,1,,,,,,,Pakistan,Dambulla
+#2999,2010-06-22,ODI,2,,,,,,,Sri Lanka,Dambulla
+#3001,2010-06-24,ODI,2,5,3.0,0,16,0,5.33,Sri Lanka,Dambulla
+#3032,2010-08-16,ODI,1,,,,,,,Sri Lanka,Dambulla
+#3039,2010-08-25,ODI,2,,,,,,,New Zealand,Dambulla
+#3040,2010-08-28,ODI,1,,,,,,,Sri Lanka,Dambulla
+#3060,2010-10-20,ODI,1,,,,,,,Australia,Visakhapatnam
+#3070,2010-11-28,ODI,2,,,,,,,New Zealand,Guwahati
+#3072,2010-12-01,ODI,1,,,,,,,New Zealand,Jaipur
+#3074,2010-12-04,ODI,1,,,,,,,New Zealand,Vadodara
+#3076,2010-12-07,ODI,1,,,,,,,New Zealand,Bengaluru
+#3077,2010-12-10,ODI,1,,,,,,,New Zealand,Chennai
+#196,2011-01-09,T20I,2,,,,,,,South Africa,Durban
+#3079,2011-01-12,ODI,1,,,,,,,South Africa,Durban
+#3080,2011-01-15,ODI,2,,,,,,,South Africa,Johannesburg
+#3082,2011-01-18,ODI,1,,,,,,,South Africa,Cape Town
+#3084,2011-01-21,ODI,1,,,,,,,South Africa,Gqeberha
+#3087,2011-01-23,ODI,1,,,,,,,South Africa,Centurion
+#3100,2011-02-19,ODI,2,,,,,,,Bangladesh,Mirpur
+#3110,2011-02-27,ODI,2,,,,,,,England,Bengaluru
+#3121,2011-03-06,ODI,1,,,,,,,Ireland,Bengaluru
+#3124,2011-03-09,ODI,1,,,,,,,Netherlands,Delhi
+#3128,2011-03-12,ODI,2,,,,,,,South Africa,Nagpur
+#3141,2011-03-20,ODI,2,,,,,,,West Indies,Chennai
+#3143,2011-03-24,ODI,1,7,1.0,0,6,0,6.00,Australia,Ahmedabad
+#3147,2011-03-30,ODI,2,,,,,,,Pakistan,Mohali
+#3148,2011-04-02,ODI,1,7,1.0,0,6,0,6.00,Sri Lanka,Mumbai
+#200,2011-06-04,T20I,2,,,,,,,West Indies,Port of Spain
+#3159,2011-06-06,ODI,1,7,3.0,1,16,0,5.33,West Indies,Port of Spain
+#3160,2011-06-08,ODI,1,,,,,,,West Indies,Port of Spain
+#3161,2011-06-11,ODI,1,6,1.0,0,7,0,7.00,West Indies,North Sound
+#3162,2011-06-13,ODI,1,,,,,,,West Indies,North Sound
+#3163,2011-06-16,ODI,2,7,3.0,0,13,0,4.33,West Indies,Kingston Jamaica
+#1997,2011-06-20,Test,2,,,,,,,West Indies,Kingston Jamaica
+#1997,2011-06-20,Test,4,,,,,,,West Indies,Kingston Jamaica
+#1998,2011-06-28,Test,2,,,,,,,West Indies,Bridgetown
+#1998,2011-06-28,Test,4,,,,,,,West Indies,Bridgetown
+#1999,2011-07-06,Test,1,,,,,,,West Indies,Roseau
+#1999,2011-07-06,Test,3,,,,,,,West Indies,Roseau
+#204,2011-08-31,T20I,2,5,3.0,0,22,1,7.33,England,Manchester
+#3186,2011-09-03,ODI,2,,,,,,,England,Chester-le-Street
+#3187,2011-09-06,ODI,2,5,3.0,0,22,0,7.33,England,Southampton
+#3189,2011-09-09,ODI,2,,,,,,,England,London
+#3191,2011-09-11,ODI,2,,,,,,,England,London
+#3195,2011-09-16,ODI,2,6,6.0,0,44,1,7.33,England,Cardiff
+#3199,2011-10-14,ODI,2,3,3.0,0,11,0,3.66,England,Hyderabad
+#3201,2011-10-17,ODI,1,3,5.0,0,18,0,3.60,England,Delhi
+#3205,2011-10-20,ODI,1,3,3.0,0,20,1,6.66,England,Mohali
+#3207,2011-10-23,ODI,1,6,4.0,0,14,0,3.50,England,Mumbai
+#3210,2011-10-25,ODI,2,,,,,,,England,Kolkata
+#214,2011-10-29,T20I,2,6,2.4,0,13,1,4.87,England,Kolkata
+#2019,2011-11-22,Test,1,6,2.0,0,9,0,4.50,West Indies,Mumbai
+#2019,2011-11-22,Test,3,,,,,,,West Indies,Mumbai
+#3217,2011-11-29,ODI,1,,,,,,,West Indies,Cuttack
+#3219,2011-12-02,ODI,1,,,,,,,West Indies,Visakhapatnam
+#3221,2011-12-05,ODI,1,,,,,,,West Indies,Ahmedabad
+#3223,2011-12-08,ODI,2,,,,,,,West Indies,Indore
+#3224,2011-12-11,ODI,2,7,1.0,0,11,0,11.00,West Indies,Chennai
+#2025,2011-12-26,Test,1,,,,,,,Australia,Melbourne
+#2025,2011-12-26,Test,3,,,,,,,Australia,Melbourne
+#2027,2012-01-03,Test,2,6,8.0,0,23,0,2.87,Australia,Sydney
+#2029,2012-01-13,Test,2,,,,,,,Australia,Perth
+#2031,2012-01-24,Test,1,6,1.0,0,3,0,3.00,Australia,Adelaide
+#2031,2012-01-24,Test,3,,,,,,,Australia,Adelaide
+#217,2012-02-01,T20I,1,,,,,,,Australia,Sydney
+#218,2012-02-03,T20I,1,3,1.0,0,7,0,7.00,Australia,Melbourne
+#3231,2012-02-05,ODI,1,3,1.0,0,4,0,4.00,Australia,Melbourne
+#3233,2012-02-08,ODI,1,,,,,,,Sri Lanka,Perth
+#3237,2012-02-12,ODI,1,,,,,,,Australia,Adelaide
+#3239,2012-02-14,ODI,1,,,,,,,Sri Lanka,Adelaide
+#3244,2012-02-19,ODI,1,,,,,,,Australia,Brisbane
+#3246,2012-02-21,ODI,1,8,1.0,0,14,0,14.00,Sri Lanka,Brisbane
+#3250,2012-02-26,ODI,1,,,,,,,Australia,Sydney
+#3251,2012-02-28,ODI,1,,,,,,,Sri Lanka,Hobart
+#3259,2012-03-13,ODI,2,,,,,,,Sri Lanka,Mirpur
+#3261,2012-03-16,ODI,2,,,,,,,Bangladesh,Mirpur
+#3263,2012-03-18,ODI,1,,,,,,,Pakistan,Mirpur
+#242,2012-03-30,T20I,1,8,1.0,0,15,0,15.00,South Africa,Johannesburg
+#3291,2012-07-21,ODI,2,,,,,,,Sri Lanka,Hambantota
+#3292,2012-07-24,ODI,2,,,,,,,Sri Lanka,Hambantota
+#3293,2012-07-28,ODI,1,,,,,,,Sri Lanka,Colombo
+#3294,2012-07-31,ODI,1,4,2.0,0,7,0,3.50,Sri Lanka,Colombo
+#3295,2012-08-04,ODI,2,4,1.0,0,3,0,3.00,Sri Lanka,Pallekele
+#255,2012-08-07,T20I,2,4,3.0,0,13,0,4.33,Sri Lanka,Pallekele
+#2054,2012-08-23,Test,2,,,,,,,New Zealand,Hyderabad
+#2054,2012-08-23,Test,3,,,,,,,New Zealand,Hyderabad
+#2055,2012-08-31,Test,1,,,,,,,New Zealand,Bengaluru
+#2055,2012-08-31,Test,3,,,,,,,New Zealand,Bengaluru
+#261,2012-09-11,T20I,1,6,3.0,0,27,0,9.00,New Zealand,Chennai
+#265,2012-09-19,T20I,2,,,,,,,Afghanistan,Colombo
+#272,2012-09-23,T20I,2,,,,,,,England,Colombo
+#278,2012-09-28,T20I,2,6,1.0,0,10,0,10.00,Australia,Colombo
+#282,2012-09-30,T20I,1,6,3.0,0,21,1,7.00,Pakistan,Colombo
+#286,2012-10-02,T20I,2,,,,,,,South Africa,Colombo
+#2058,2012-11-15,Test,2,,,,,,,England,Ahmedabad
+#2058,2012-11-15,Test,3,,,,,,,England,Ahmedabad
+#2062,2012-11-23,Test,2,,,,,,,England,Mumbai
+#2062,2012-11-23,Test,4,,,,,,,England,Mumbai
+#2065,2012-12-05,Test,2,,,,,,,England,Kolkata
+#2065,2012-12-05,Test,4,,,,,,,England,Kolkata
+#2066,2012-12-13,Test,1,,,,,,,England,Nagpur
+#2066,2012-12-13,Test,3,,,,,,,England,Nagpur
+#292,2012-12-20,T20I,1,6,1.0,0,10,0,10.00,England,Pune
+#294,2012-12-22,T20I,2,,,,,,,England,Mumbai
+#296,2012-12-25,T20I,2,4,2.0,0,21,0,10.50,Pakistan,Bengaluru
+#298,2012-12-28,T20I,2,,,,,,,Pakistan,Ahmedabad
+#3314,2012-12-30,ODI,2,7,2.5,0,21,0,7.41,Pakistan,Chennai
+#3315,2013-01-03,ODI,1,,,,,,,Pakistan,Kolkata
+#3316,2013-01-06,ODI,2,,,,,,,Pakistan,Delhi
+#3318,2013-01-11,ODI,1,7,1.0,0,9,0,9.00,England,Rajkot
+#3320,2013-01-15,ODI,2,,,,,,,England,Kochi
+#3322,2013-01-19,ODI,1,,,,,,,England,Ranchi
+#3327,2013-01-23,ODI,1,,,,,,,England,Mohali
+#3329,2013-01-27,ODI,2,,,,,,,England,Dharamshala
+#2074,2013-02-22,Test,1,,,,,,,Australia,Chennai
+#2074,2013-02-22,Test,3,,,,,,,Australia,Chennai
+#2076,2013-03-02,Test,1,,,,,,,Australia,Hyderabad
+#2076,2013-03-02,Test,3,,,,,,,Australia,Hyderabad
+#2081,2013-03-14,Test,1,,,,,,,Australia,Mohali
+#2081,2013-03-14,Test,3,,,,,,,Australia,Mohali
+#2085,2013-03-22,Test,1,,,,,,,Australia,Delhi
+#2085,2013-03-22,Test,3,,,,,,,Australia,Delhi
+#3363,2013-06-06,ODI,2,,,,,,,South Africa,Cardiff
+#3368,2013-06-11,ODI,1,5,4.0,0,26,0,6.50,West Indies,London
+#3372,2013-06-15,ODI,1,5,2.0,0,11,0,5.50,Pakistan,Birmingham
+#3376,2013-06-20,ODI,1,,,,,,,Sri Lanka,Cardiff
+#3377,2013-06-23,ODI,2,,,,,,,England,Birmingham
+#3380,2013-06-30,ODI,2,,,,,,,West Indies,Kingston Jamaica
+#3382,2013-07-02,ODI,1,6,2.0,0,9,0,4.50,Sri Lanka,Kingston Jamaica
+#3383,2013-07-05,ODI,2,,,,,,,West Indies,Port of Spain
+#3387,2013-07-09,ODI,2,,,,,,,Sri Lanka,Port of Spain
+#3388,2013-07-11,ODI,1,4,3.0,0,17,0,5.66,Sri Lanka,Port of Spain
+#3395,2013-07-24,ODI,1,,,,,,,Zimbabwe,Harare
+#3397,2013-07-26,ODI,2,,,,,,,Zimbabwe,Harare
+#3399,2013-07-28,ODI,1,4,1.0,0,7,0,7.00,Zimbabwe,Harare
+#3402,2013-08-01,ODI,1,,,,,,,Zimbabwe,Bulawayo
+#3403,2013-08-03,ODI,1,,,,,,,Zimbabwe,Bulawayo
+#331,2013-10-10,T20I,1,6,2.0,0,24,0,12.00,Australia,Rajkot
+#3419,2013-10-13,ODI,1,6,1.0,0,12,0,12.00,Australia,Pune
+#3420,2013-10-16,ODI,1,,,,,,,Australia,Jaipur
+#3421,2013-10-19,ODI,2,7,1.0,0,18,0,18.00,Australia,Mohali
+#3422,2013-10-23,ODI,1,,,,,,,Australia,Ranchi
+#3424,2013-10-30,ODI,1,6,2.0,0,15,0,7.50,Australia,Nagpur
+#3428,2013-11-02,ODI,2,,,,,,,Australia,Bengaluru
+#2101,2013-11-06,Test,1,,,,,,,West Indies,Kolkata
+#2101,2013-11-06,Test,3,,,,,,,West Indies,Kolkata
+#2102,2013-11-14,Test,1,,,,,,,West Indies,Mumbai
+#2102,2013-11-14,Test,3,,,,,,,West Indies,Mumbai
+#3436,2013-11-21,ODI,1,,,,,,,West Indies,Kochi
+#3437,2013-11-24,ODI,2,,,,,,,West Indies,Visakhapatnam
+#3439,2013-11-27,ODI,1,,,,,,,West Indies,Kanpur
+#3442,2013-12-05,ODI,1,7,2.0,0,15,1,7.50,South Africa,Johannesburg
+#3443,2013-12-08,ODI,1,6,3.0,0,17,0,5.66,South Africa,Durban
+#3444,2013-12-11,ODI,1,7,3.0,0,22,0,7.33,South Africa,Centurion
+#2108,2013-12-18,Test,2,,,,,,,South Africa,Johannesburg
+#2108,2013-12-18,Test,4,7,6.0,0,18,0,3.00,South Africa,Johannesburg
+#2111,2013-12-26,Test,2,,,,,,,South Africa,Durban
+#2111,2013-12-26,Test,4,,,,,,,South Africa,Durban
+#3456,2014-01-19,ODI,1,6,3.0,0,13,0,4.33,New Zealand,Napier
+#3458,2014-01-22,ODI,1,5,2.0,0,12,0,6.00,New Zealand,Hamilton Waikato
+#3462,2014-01-25,ODI,1,,,,,,,New Zealand,Auckland
+#3465,2014-01-28,ODI,2,,,,,,,New Zealand,Hamilton Waikato
+#3467,2014-01-31,ODI,1,6,7.0,0,36,1,5.14,New Zealand,Wellington
+#2118,2014-02-06,Test,1,5,1.0,0,4,0,4.00,New Zealand,Auckland
+#2118,2014-02-06,Test,3,,,,,,,New Zealand,Auckland
+#2120,2014-02-14,Test,1,,,,,,,New Zealand,Wellington
+#2120,2014-02-14,Test,3,6,6.0,1,13,0,2.16,New Zealand,Wellington
+#3474,2014-02-26,ODI,1,7,1.1,0,6,0,5.14,Bangladesh,Fatullah Dhaka
+#3476,2014-02-28,ODI,2,,,,,,,Sri Lanka,Fatullah Dhaka
+#3479,2014-03-02,ODI,2,,,,,,,Pakistan,Mirpur
+#3483,2014-03-05,ODI,1,,,,,,,Afghanistan,Mirpur
+#378,2014-03-21,T20I,1,,,,,,,Pakistan,Mirpur
+#382,2014-03-23,T20I,1,,,,,,,West Indies,Mirpur
+#389,2014-03-28,T20I,1,,,,,,,Bangladesh,Mirpur
+#393,2014-03-30,T20I,2,,,,,,,Australia,Mirpur
+#399,2014-04-04,T20I,1,,,,,,,South Africa,Mirpur
+#400,2014-04-06,T20I,2,,,,,,,Sri Lanka,Mirpur
+#2128,2014-07-09,Test,2,,,,,,,England,Nottingham
+#2130,2014-07-17,Test,2,,,,,,,England,London
+#2130,2014-07-17,Test,4,,,,,,,England,London
+#2132,2014-07-27,Test,1,,,,,,,England,Southampton
+#2132,2014-07-27,Test,3,,,,,,,England,Southampton
+#2134,2014-08-07,Test,2,,,,,,,England,Manchester
+#2137,2014-08-15,Test,2,,,,,,,England,London
+#3517,2014-08-27,ODI,2,,,,,,,England,Cardiff
+#3520,2014-08-30,ODI,1,,,,,,,England,Nottingham
+#3523,2014-09-02,ODI,1,,,,,,,England,Birmingham
+#3525,2014-09-05,ODI,1,,,,,,,England,Leeds
+#405,2014-09-07,T20I,1,,,,,,,England,Birmingham
+#3531,2014-10-08,ODI,1,,,,,,,West Indies,Kochi
+#3533,2014-10-11,ODI,2,6,2.0,0,20,0,10.00,West Indies,Delhi
+#3535,2014-10-17,ODI,2,4,1.0,0,14,0,14.00,West Indies,Dharamshala
+#3539,2014-11-02,ODI,2,4,0.5,0,6,0,7.20,Sri Lanka,Cuttack
+#3540,2014-11-06,ODI,1,,,,,,,Sri Lanka,Ahmedabad
+#3543,2014-11-09,ODI,1,,,,,,,Sri Lanka,Hyderabad
+#3544,2014-11-13,ODI,2,,,,,,,Sri Lanka,Kolkata
+#3547,2014-11-16,ODI,1,,,,,,,Sri Lanka,Ranchi
+#2148,2014-12-09,Test,1,,,,,,,Australia,Adelaide
+#2148,2014-12-09,Test,3,,,,,,,Australia,Adelaide
+#2149,2014-12-17,Test,2,,,,,,,Australia,Brisbane
+#2149,2014-12-17,Test,4,,,,,,,Australia,Brisbane
+#2152,2014-12-26,Test,1,,,,,,,Australia,Melbourne
+#2152,2014-12-26,Test,3,,,,,,,Australia,Melbourne
+#2156,2015-01-06,Test,1,,,,,,,Australia,Sydney
+#2156,2015-01-06,Test,3,,,,,,,Australia,Sydney
+#3582,2015-01-18,ODI,2,,,,,,,Australia,Melbourne
+#3586,2015-01-20,ODI,2,,,,,,,England,Brisbane
+#3592,2015-01-26,ODI,,,,,,,,Australia,Sydney
+#3595,2015-01-30,ODI,2,,,,,,,England,Perth
+#3602,2015-02-15,ODI,2,,,,,,,Pakistan,Adelaide
+#3610,2015-02-22,ODI,2,,,,,,,South Africa,Melbourne
+#3618,2015-02-28,ODI,1,,,,,,,U.A.E.,Perth
+#3625,2015-03-06,ODI,1,,,,,,,West Indies,Perth
+#3631,2015-03-10,ODI,1,,,,,,,Ireland,Hamilton Waikato
+#3636,2015-03-14,ODI,1,,,,,,,Zimbabwe,Auckland
+#3641,2015-03-19,ODI,2,,,,,,,Bangladesh,Melbourne
+#3645,2015-03-26,ODI,1,4,1.0,0,7,0,7.00,Australia,Sydney
+#2165,2015-06-10,Test,2,,,,,,,Bangladesh,Fatullah Dhaka
+#2165,2015-06-10,Test,3,,,,,,,Bangladesh,Fatullah Dhaka
+#3658,2015-06-18,ODI,1,7,2.0,0,12,0,6.00,Bangladesh,Mirpur
+#3660,2015-06-21,ODI,2,,,,,,,Bangladesh,Mirpur
+#3661,2015-06-24,ODI,2,,,,,,,Bangladesh,Mirpur
+#2176,2015-08-12,Test,1,,,,,,,Sri Lanka,Galle
+#2176,2015-08-12,Test,3,,,,,,,Sri Lanka,Galle
+#2177,2015-08-20,Test,2,,,,,,,Sri Lanka,Colombo
+#2177,2015-08-20,Test,4,,,,,,,Sri Lanka,Colombo
+#2179,2015-08-28,Test,2,,,,,,,Sri Lanka,Colombo
+#2179,2015-08-28,Test,4,,,,,,,Sri Lanka,Colombo
+#456,2015-10-02,T20I,2,,,,,,,South Africa,Dharamshala
+#457,2015-10-05,T20I,2,,,,,,,South Africa,Cuttack
+#3689,2015-10-11,ODI,1,7,0.2,0,1,0,3.00,South Africa,Kanpur
+#3692,2015-10-14,ODI,2,,,,,,,South Africa,Indore
+#3695,2015-10-18,ODI,1,,,,,,,South Africa,Rajkot
+#3698,2015-10-22,ODI,2,,,,,,,South Africa,Chennai
+#3700,2015-10-25,ODI,1,7,2.0,0,14,0,7.00,South Africa,Mumbai
+#2186,2015-11-05,Test,2,,,,,,,South Africa,Mohali
+#2186,2015-11-05,Test,4,,,,,,,South Africa,Mohali
+#2188,2015-11-14,Test,1,,,,,,,South Africa,Bengaluru
+#2189,2015-11-25,Test,2,,,,,,,South Africa,Nagpur
+#2189,2015-11-25,Test,4,,,,,,,South Africa,Nagpur
+#2191,2015-12-03,Test,2,,,,,,,South Africa,Delhi
+#2191,2015-12-03,Test,4,7,1.0,1,0,0,0.00,South Africa,Delhi
+#3723,2016-01-12,ODI,2,7,2.0,0,13,0,6.50,Australia,Perth
+#3724,2016-01-15,ODI,2,6,1.0,0,7,0,7.00,Australia,Brisbane
+#3725,2016-01-17,ODI,2,,,,,,,Australia,Melbourne
+#3726,2016-01-20,ODI,1,,,,,,,Australia,Canberra
+#3727,2016-01-23,ODI,1,,,,,,,Australia,Sydney
+#485,2016-01-26,T20I,2,,,,,,,Australia,Adelaide
+#486,2016-01-29,T20I,2,,,,,,,Australia,Melbourne
+#489,2016-01-31,T20I,1,,,,,,,Australia,Sydney
+#509,2016-02-24,T20I,2,,,,,,,Bangladesh,Mirpur
+#512,2016-02-27,T20I,1,,,,,,,Pakistan,Mirpur
+#515,2016-03-01,T20I,1,,,,,,,Sri Lanka,Mirpur
+#517,2016-03-03,T20I,1,,,,,,,U.A.E.,Mirpur
+#521,2016-03-06,T20I,1,,,,,,,Bangladesh,Mirpur
+#535,2016-03-15,T20I,1,,,,,,,New Zealand,Nagpur
+#541,2016-03-19,T20I,1,,,,,,,Pakistan,Kolkata
+#547,2016-03-23,T20I,2,,,,,,,Bangladesh,Bengaluru
+#553,2016-03-27,T20I,1,,,,,,,Australia,Mohali
+#556,2016-03-31,T20I,2,6,1.4,0,15,1,9.00,West Indies,Mumbai
+#2207,2016-07-21,Test,2,,,,,,,West Indies,North Sound
+#2207,2016-07-21,Test,3,,,,,,,West Indies,North Sound
+#2211,2016-07-30,Test,1,,,,,,,West Indies,Kingston Jamaica
+#2211,2016-07-30,Test,3,,,,,,,West Indies,Kingston Jamaica
+#2215,2016-08-09,Test,2,,,,,,,West Indies,Gros Islet
+#2215,2016-08-09,Test,4,,,,,,,West Indies,Gros Islet
+#2218,2016-08-18,Test,1,,,,,,,West Indies,Port of Spain
+#562,2016-08-27,T20I,1,,,,,,,West Indies,Lauderhill
+#563,2016-08-28,T20I,1,,,,,,,West Indies,Lauderhill
+#2221,2016-09-22,Test,2,,,,,,,New Zealand,Kanpur
+#2221,2016-09-22,Test,4,,,,,,,New Zealand,Kanpur
+#2222,2016-09-30,Test,2,,,,,,,New Zealand,Kolkata
+#2222,2016-09-30,Test,4,,,,,,,New Zealand,Kolkata
+#2223,2016-10-08,Test,2,,,,,,,New Zealand,Indore
+#2223,2016-10-08,Test,4,,,,,,,New Zealand,Indore
+#3796,2016-10-16,ODI,1,,,,,,,New Zealand,Dharamshala
+#3797,2016-10-20,ODI,1,,,,,,,New Zealand,Delhi
+#3798,2016-10-23,ODI,1,,,,,,,New Zealand,Mohali
+#3799,2016-10-26,ODI,1,,,,,,,New Zealand,Ranchi
+#3800,2016-10-29,ODI,2,,,,,,,New Zealand,Visakhapatnam
+#2232,2016-11-09,Test,1,,,,,,,England,Rajkot
+#2232,2016-11-09,Test,3,,,,,,,England,Rajkot
+#2235,2016-11-17,Test,2,,,,,,,England,Visakhapatnam
+#2235,2016-11-17,Test,4,,,,,,,England,Visakhapatnam
+#2238,2016-11-26,Test,1,,,,,,,England,Mohali
+#2238,2016-11-26,Test,3,,,,,,,England,Mohali
+#2239,2016-12-08,Test,1,,,,,,,England,Mumbai
+#2239,2016-12-08,Test,3,,,,,,,England,Mumbai
+#2241,2016-12-16,Test,1,,,,,,,England,Chennai
+#2241,2016-12-16,Test,3,,,,,,,England,Chennai
+#3819,2017-01-15,ODI,1,,,,,,,England,Pune
+#3821,2017-01-19,ODI,2,,,,,,,England,Cuttack
+#3824,2017-01-22,ODI,1,,,,,,,England,Kolkata
+#592,2017-01-26,T20I,2,,,,,,,England,Kanpur
+#593,2017-01-29,T20I,2,,,,,,,England,Nagpur
+#594,2017-02-01,T20I,2,,,,,,,England,Bengaluru
+#2249,2017-02-09,Test,2,,,,,,,Bangladesh,Hyderabad
+#2249,2017-02-09,Test,4,,,,,,,Bangladesh,Hyderabad
+#2250,2017-02-23,Test,1,,,,,,,Australia,Pune
+#2250,2017-02-23,Test,3,,,,,,,Australia,Pune
+#2251,2017-03-04,Test,2,,,,,,,Australia,Bengaluru
+#2251,2017-03-04,Test,4,,,,,,,Australia,Bengaluru
+#2256,2017-03-16,Test,1,,,,,,,Australia,Ranchi
+#2256,2017-03-16,Test,3,,,,,,,Australia,Ranchi
+#3878,2017-06-04,ODI,2,,,,,,,Pakistan,Birmingham
+#3882,2017-06-08,ODI,2,7,3.0,0,17,0,5.66,Sri Lanka,London
+#3886,2017-06-11,ODI,1,,,,,,,South Africa,London
+#3891,2017-06-15,ODI,1,,,,,,,Bangladesh,Birmingham
+#3894,2017-06-18,ODI,1,,,,,,,Pakistan,London
+#3895,2017-06-23,ODI,,,,,,,,West Indies,Port of Spain
+#3896,2017-06-25,ODI,2,,,,,,,West Indies,Port of Spain
+#3898,2017-06-30,ODI,2,,,,,,,West Indies,North Sound
+#3900,2017-07-02,ODI,1,,,,,,,West Indies,North Sound
+#3902,2017-07-06,ODI,1,,,,,,,West Indies,Kingston Jamaica
+#617,2017-07-09,T20I,2,,,,,,,West Indies,Kingston Jamaica
+#2265,2017-07-26,Test,2,,,,,,,Sri Lanka,Galle
+#2265,2017-07-26,Test,4,,,,,,,Sri Lanka,Galle
+#2267,2017-08-03,Test,2,,,,,,,Sri Lanka,Colombo
+#2267,2017-08-03,Test,3,,,,,,,Sri Lanka,Colombo
+#2269,2017-08-12,Test,2,,,,,,,Sri Lanka,Pallekele
+#2269,2017-08-12,Test,3,,,,,,,Sri Lanka,Pallekele
+#3905,2017-08-20,ODI,1,,,,,,,Sri Lanka,Dambulla
+#3906,2017-08-24,ODI,1,,,,,,,Sri Lanka,Pallekele
+#3907,2017-08-27,ODI,1,,,,,,,Sri Lanka,Pallekele
+#3908,2017-08-31,ODI,2,4,2.0,0,12,0,6.00,Sri Lanka,Colombo
+#3909,2017-09-03,ODI,1,,,,,,,Sri Lanka,Colombo
+#618,2017-09-06,T20I,1,,,,,,,Sri Lanka,Colombo
+#3910,2017-09-17,ODI,2,,,,,,,Australia,Chennai
+#3912,2017-09-21,ODI,2,,,,,,,Australia,Kolkata
+#3914,2017-09-24,ODI,1,,,,,,,Australia,Indore
+#3917,2017-09-28,ODI,1,,,,,,,Australia,Bengaluru
+#3919,2017-10-01,ODI,1,,,,,,,Australia,Nagpur
+#623,2017-10-07,T20I,1,,,,,,,Australia,Ranchi
+#624,2017-10-10,T20I,2,,,,,,,Australia,Guwahati
+#3928,2017-10-22,ODI,2,,,,,,,New Zealand,Mumbai
+#3931,2017-10-25,ODI,1,,,,,,,New Zealand,Pune
+#3932,2017-10-29,ODI,2,,,,,,,New Zealand,Kanpur
+#630,2017-11-01,T20I,2,,,,,,,New Zealand,Delhi
+#631,2017-11-04,T20I,1,,,,,,,New Zealand,Rajkot
+#632,2017-11-07,T20I,2,,,,,,,New Zealand,Thiruvananthapuram
+#2281,2017-11-16,Test,2,5,1.1,0,5,0,4.28,Sri Lanka,Kolkata
+#2281,2017-11-16,Test,4,,,,,,,Sri Lanka,Kolkata
+#2283,2017-11-24,Test,1,,,,,,,Sri Lanka,Nagpur
+#2283,2017-11-24,Test,3,,,,,,,Sri Lanka,Nagpur
+#2286,2017-12-02,Test,2,,,,,,,Sri Lanka,Delhi
+#2286,2017-12-02,Test,4,6,1.0,0,1,0,1.00,Sri Lanka,Delhi
+#2292,2018-01-05,Test,1,,,,,,,South Africa,Cape Town
+#2292,2018-01-05,Test,3,,,,,,,South Africa,Cape Town
+#2293,2018-01-13,Test,1,,,,,,,South Africa,Centurion
+#2293,2018-01-13,Test,3,,,,,,,South Africa,Centurion
+#2294,2018-01-24,Test,2,,,,,,,South Africa,Johannesburg
+#2294,2018-01-24,Test,4,,,,,,,South Africa,Johannesburg
+#3969,2018-02-01,ODI,1,,,,,,,South Africa,Durban
+#3970,2018-02-04,ODI,1,,,,,,,South Africa,Centurion
+#3971,2018-02-07,ODI,2,,,,,,,South Africa,Cape Town
+#3973,2018-02-10,ODI,2,,,,,,,South Africa,Johannesburg
+#3976,2018-02-13,ODI,2,,,,,,,South Africa,Gqeberha
+#3978,2018-02-16,ODI,1,,,,,,,South Africa,Centurion
+#652,2018-02-18,T20I,2,,,,,,,South Africa,Johannesburg
+#654,2018-02-21,T20I,2,,,,,,,South Africa,Centurion
+#678,2018-06-27,T20I,2,,,,,,,Ireland,Dublin (Malahide)
+#680,2018-06-29,T20I,2,,,,,,,Ireland,Dublin (Malahide)
+#684,2018-07-03,T20I,1,,,,,,,England,Manchester
+#688,2018-07-06,T20I,2,,,,,,,England,Cardiff
+#690,2018-07-08,T20I,1,,,,,,,England,Bristol
+#4014,2018-07-12,ODI,1,,,,,,,England,Nottingham
+#4016,2018-07-14,ODI,1,,,,,,,England,London
+#4018,2018-07-17,ODI,2,,,,,,,England,Leeds
+#2314,2018-08-01,Test,1,,,,,,,England,Birmingham
+#2314,2018-08-01,Test,3,,,,,,,England,Birmingham
+#2315,2018-08-09,Test,2,,,,,,,England,London
+#2316,2018-08-18,Test,2,,,,,,,England,Nottingham
+#2316,2018-08-18,Test,4,,,,,,,England,Nottingham
+#2317,2018-08-30,Test,1,,,,,,,England,Southampton
+#2317,2018-08-30,Test,3,,,,,,,England,Southampton
+#2318,2018-09-07,Test,1,,,,,,,England,London
+#2318,2018-09-07,Test,3,,,,,,,England,London
+#2319,2018-10-04,Test,2,,,,,,,West Indies,Rajkot
+#2319,2018-10-04,Test,3,,,,,,,West Indies,Rajkot
+#2321,2018-10-12,Test,1,,,,,,,West Indies,Hyderabad
+#2321,2018-10-12,Test,3,,,,,,,West Indies,Hyderabad
+#4056,2018-10-21,ODI,1,,,,,,,West Indies,Guwahati
+#4059,2018-10-24,ODI,2,,,,,,,West Indies,Visakhapatnam
+#4062,2018-10-27,ODI,1,,,,,,,West Indies,Pune
+#4063,2018-10-29,ODI,2,,,,,,,West Indies,Mumbai
+#4064,2018-11-01,ODI,1,,,,,,,West Indies,Thiruvananthapuram
+#712,2018-11-21,T20I,1,,,,,,,Australia,Brisbane
+#713,2018-11-23,T20I,1,,,,,,,Australia,Melbourne
+#714,2018-11-25,T20I,1,,,,,,,Australia,Sydney
+#2333,2018-12-06,Test,2,,,,,,,Australia,Adelaide
+#2333,2018-12-06,Test,4,,,,,,,Australia,Adelaide
+#2334,2018-12-14,Test,1,,,,,,,Australia,Perth
+#2334,2018-12-14,Test,3,,,,,,,Australia,Perth
+#2337,2018-12-26,Test,2,,,,,,,Australia,Melbourne
+#2337,2018-12-26,Test,4,,,,,,,Australia,Melbourne
+#2339,2019-01-03,Test,2,,,,,,,Australia,Sydney
+#2339,2019-01-03,Test,3,,,,,,,Australia,Sydney
+#4077,2019-01-12,ODI,1,,,,,,,Australia,Sydney
+#4078,2019-01-15,ODI,1,,,,,,,Australia,Adelaide
+#4079,2019-01-18,ODI,1,,,,,,,Australia,Melbourne
+#4082,2019-01-23,ODI,1,,,,,,,New Zealand,Napier
+#4085,2019-01-26,ODI,2,,,,,,,New Zealand,Mount Maunganui
+#4088,2019-01-28,ODI,1,,,,,,,New Zealand,Mount Maunganui
+#748,2019-02-24,T20I,2,,,,,,,Australia,Visakhapatnam
+#749,2019-02-27,T20I,2,,,,,,,Australia,Bengaluru
+#4102,2019-03-02,ODI,1,,,,,,,Australia,Hyderabad
+#4106,2019-03-05,ODI,2,,,,,,,Australia,Nagpur
+#4109,2019-03-08,ODI,1,,,,,,,Australia,Ranchi
+#4111,2019-03-10,ODI,2,,,,,,,Australia,Mohali
+#4113,2019-03-13,ODI,1,,,,,,,Australia,Delhi
+#4150,2019-06-05,ODI,1,,,,,,,South Africa,Southampton
+#4155,2019-06-09,ODI,2,,,,,,,Australia,London
+#4161,2019-06-16,ODI,2,,,,,,,Pakistan,Manchester
+#4169,2019-06-22,ODI,2,,,,,,,Afghanistan,Southampton
+#4175,2019-06-27,ODI,2,,,,,,,West Indies,Manchester
+#4179,2019-06-30,ODI,1,,,,,,,England,Birmingham
+#4182,2019-07-02,ODI,2,,,,,,,Bangladesh,Birmingham
+#4187,2019-07-06,ODI,1,,,,,,,Sri Lanka,Leeds
+#4190,2019-07-09,ODI,1,,,,,,,New Zealand,Manchester
+#842,2019-08-03,T20I,1,,,,,,,West Indies,Lauderhill
+#843,2019-08-04,T20I,2,,,,,,,West Indies,Lauderhill
+#846,2019-08-06,T20I,1,,,,,,,West Indies,Providence Guyana
+#4196,2019-08-08,ODI,1,,,,,,,West Indies,Providence Guyana
+#4197,2019-08-11,ODI,2,,,,,,,West Indies,Port of Spain
+#4199,2019-08-14,ODI,1,,,,,,,West Indies,Port of Spain
+#2358,2019-08-22,Test,2,,,,,,,West Indies,North Sound
+#2358,2019-08-22,Test,4,,,,,,,West Indies,North Sound
+#2359,2019-08-30,Test,2,,,,,,,West Indies,Kingston Jamaica
+#2359,2019-08-30,Test,4,,,,,,,West Indies,Kingston Jamaica
+#888,2019-09-18,T20I,1,,,,,,,South Africa,Mohali
+#893,2019-09-22,T20I,2,,,,,,,South Africa,Bengaluru
+#2363,2019-10-02,Test,2,,,,,,,South Africa,Visakhapatnam
+#2363,2019-10-02,Test,4,,,,,,,South Africa,Visakhapatnam
+#2364,2019-10-10,Test,2,,,,,,,South Africa,Pune
+#2364,2019-10-10,Test,3,7,1.0,0,4,0,4.00,South Africa,Pune
+#2365,2019-10-19,Test,2,,,,,,,South Africa,Ranchi
+#2365,2019-10-19,Test,3,,,,,,,South Africa,Ranchi
+#2366,2019-11-14,Test,1,,,,,,,Bangladesh,Indore
+#2366,2019-11-14,Test,3,,,,,,,Bangladesh,Indore
+#2369,2019-11-22,Test,1,,,,,,,Bangladesh,Kolkata
+#2369,2019-11-22,Test,3,,,,,,,Bangladesh,Kolkata
+#1020,2019-12-06,T20I,1,,,,,,,West Indies,Hyderabad
+#1022,2019-12-08,T20I,2,,,,,,,West Indies,Thiruvananthapuram
+#1024,2019-12-11,T20I,2,,,,,,,West Indies,Mumbai
+#4221,2019-12-15,ODI,2,,,,,,,West Indies,Chennai
+#4222,2019-12-18,ODI,2,,,,,,,West Indies,Visakhapatnam
+#4223,2019-12-22,ODI,1,,,,,,,West Indies,Cuttack
+#1025,2020-01-05,T20I,,,,,,,,Sri Lanka,Guwahati
+#1026,2020-01-07,T20I,1,,,,,,,Sri Lanka,Indore
+#1027,2020-01-10,T20I,2,,,,,,,Sri Lanka,Pune
+#4231,2020-01-14,ODI,2,,,,,,,Australia,Mumbai
+#4232,2020-01-17,ODI,2,,,,,,,Australia,Rajkot
+#4233,2020-01-19,ODI,1,,,,,,,Australia,Bengaluru
+#1031,2020-01-24,T20I,1,,,,,,,New Zealand,Auckland
+#1034,2020-01-26,T20I,1,,,,,,,New Zealand,Auckland
+#1035,2020-01-29,T20I,2,,,,,,,New Zealand,Hamilton Waikato
+#1036,2020-01-31,T20I,2,,,,,,,New Zealand,Wellington
+#4235,2020-02-05,ODI,2,,,,,,,New Zealand,Hamilton Waikato
+#4239,2020-02-08,ODI,1,,,,,,,New Zealand,Auckland
+#4243,2020-02-11,ODI,2,,,,,,,New Zealand,Mount Maunganui
+#2385,2020-02-21,Test,2,,,,,,,New Zealand,Wellington
+#2385,2020-02-21,Test,4,,,,,,,New Zealand,Wellington
+#2387,2020-02-29,Test,2,,,,,,,New Zealand,Christchurch
+#2387,2020-02-29,Test,4,5,1.0,0,4,0,4.00,New Zealand,Christchurch
+#4265,2020-11-27,ODI,1,,,,,,,Australia,Sydney
+#4266,2020-11-29,ODI,1,,,,,,,Australia,Sydney
+#4267,2020-12-02,ODI,2,,,,,,,Australia,Canberra
+#1114,2020-12-04,T20I,2,,,,,,,Australia,Canberra
+#1115,2020-12-06,T20I,1,,,,,,,Australia,Sydney
+#1116,2020-12-08,T20I,1,,,,,,,Australia,Sydney
+#2396,2020-12-17,Test,2,,,,,,,Australia,Adelaide
+#2396,2020-12-17,Test,4,,,,,,,Australia,Adelaide
+#2409,2021-02-05,Test,1,,,,,,,England,Chennai
+#2409,2021-02-05,Test,3,,,,,,,England,Chennai
+#2411,2021-02-13,Test,2,,,,,,,England,Chennai
+#2411,2021-02-13,Test,4,,,,,,,England,Chennai
+#2412,2021-02-24,Test,1,,,,,,,England,Ahmedabad
+#2412,2021-02-24,Test,3,,,,,,,England,Ahmedabad
+#2414,2021-03-04,Test,1,,,,,,,England,Ahmedabad
+#2414,2021-03-04,Test,3,,,,,,,England,Ahmedabad
+#1131,2021-03-12,T20I,2,,,,,,,England,Ahmedabad
+#1132,2021-03-14,T20I,1,,,,,,,England,Ahmedabad
+#1133,2021-03-16,T20I,2,,,,,,,England,Ahmedabad
+#1135,2021-03-18,T20I,2,,,,,,,England,Ahmedabad
+#1138,2021-03-20,T20I,2,,,,,,,England,Ahmedabad
+#4281,2021-03-23,ODI,2,,,,,,,England,Pune
+#4283,2021-03-26,ODI,2,,,,,,,England,Pune
+#4284,2021-03-28,ODI,2,,,,,,,England,Pune
+#2425,2021-06-18,Test,2,,,,,,,New Zealand,Southampton
+#2425,2021-06-18,Test,4,,,,,,,New Zealand,Southampton
+#2428,2021-08-04,Test,1,,,,,,,England,Nottingham
+#2428,2021-08-04,Test,3,,,,,,,England,Nottingham
+#2429,2021-08-12,Test,2,,,,,,,England,London
+#2429,2021-08-12,Test,4,,,,,,,England,London
+#2432,2021-08-25,Test,2,,,,,,,England,Leeds
+#2433,2021-09-02,Test,2,,,,,,,England,London
+#2433,2021-09-02,Test,4,,,,,,,England,London
+#1361,2021-10-24,T20I,2,,,,,,,Pakistan,Dubai
+#1381,2021-10-31,T20I,2,,,,,,,New Zealand,Dubai
+#1390,2021-11-03,T20I,2,,,,,,,Afghanistan,Abu Dhabi
+#1396,2021-11-05,T20I,1,,,,,,,Scotland,Dubai
+#1410,2021-11-08,T20I,1,,,,,,,Namibia,Dubai
+#2438,2021-12-03,Test,2,,,,,,,New Zealand,Mumbai
+#2438,2021-12-03,Test,4,,,,,,,New Zealand,Mumbai
+#2443,2021-12-26,Test,2,,,,,,,South Africa,Centurion
+#2443,2021-12-26,Test,4,,,,,,,South Africa,Centurion
+#2448,2022-01-11,Test,2,,,,,,,South Africa,Cape Town
+#2448,2022-01-11,Test,4,,,,,,,South Africa,Cape Town
+#4344,2022-01-19,ODI,1,,,,,,,South Africa,Paarl
+#4346,2022-01-21,ODI,2,,,,,,,South Africa,Paarl
+#4349,2022-01-23,ODI,1,,,,,,,South Africa,Cape Town
+#4353,2022-02-06,ODI,1,,,,,,,West Indies,Ahmedabad
+#4355,2022-02-09,ODI,2,,,,,,,West Indies,Ahmedabad
+#4356,2022-02-11,ODI,2,,,,,,,West Indies,Ahmedabad
+#1467,2022-02-16,T20I,1,,,,,,,West Indies,Kolkata
+#1473,2022-02-18,T20I,2,,,,,,,West Indies,Kolkata
+#2452,2022-03-04,Test,2,,,,,,,Sri Lanka,Mohali
+#2452,2022-03-04,Test,3,,,,,,,Sri Lanka,Mohali
+#2456,2022-03-12,Test,2,,,,,,,Sri Lanka,Bengaluru
+#2456,2022-03-12,Test,4,,,,,,,Sri Lanka,Bengaluru
+#2470,2022-07-01,Test,2,,,,,,,England,Birmingham
+#2470,2022-07-01,Test,4,,,,,,,England,Birmingham
+#1628,2022-07-09,T20I,2,,,,,,,England,Birmingham
+#1631,2022-07-10,T20I,1,,,,,,,England,Nottingham
+#4428,2022-07-14,ODI,1,,,,,,,England,London
+#4433,2022-07-17,ODI,1,,,,,,,England,Manchester
+#1750,2022-08-28,T20I,1,,,,,,,Pakistan,Dubai
+#1754,2022-08-31,T20I,2,6,1.0,0,6,0,6.00,Hong Kong,Dubai
+#1758,2022-09-04,T20I,2,,,,,,,Pakistan,Dubai
+#1759,2022-09-06,T20I,2,,,,,,,Sri Lanka,Dubai
+#1761,2022-09-08,T20I,2,,,,,,,Afghanistan,Dubai
+#1788,2022-09-20,T20I,2,,,,,,,Australia,Mohali
+#1794,2022-09-23,T20I,1,,,,,,,Australia,Nagpur
+#1796,2022-09-25,T20I,1,,,,,,,Australia,Hyderabad
+#1800,2022-09-28,T20I,1,,,,,,,South Africa,Thiruvananthapuram
+#1803,2022-10-02,T20I,2,,,,,,,South Africa,Guwahati
+#1842,2022-10-23,T20I,1,,,,,,,Pakistan,Melbourne
+#1848,2022-10-27,T20I,2,,,,,,,Netherlands,Sydney
+#1853,2022-10-30,T20I,2,,,,,,,South Africa,Perth
+#1860,2022-11-02,T20I,2,,,,,,,Bangladesh,Adelaide
+#1873,2022-11-06,T20I,2,,,,,,,Zimbabwe,Melbourne
+#1878,2022-11-10,T20I,2,,,,,,,England,Adelaide
+#4493,2022-12-04,ODI,2,,,,,,,Bangladesh,Mirpur
+#4496,2022-12-07,ODI,1,,,,,,,Bangladesh,Mirpur
+#4499,2022-12-10,ODI,2,,,,,,,Bangladesh,Chattogram Chittagong
+#2481,2022-12-14,Test,2,,,,,,,Bangladesh,Chattogram Chittagong
+#2481,2022-12-14,Test,4,,,,,,,Bangladesh,Chattogram Chittagong
+#2484,2022-12-22,Test,1,,,,,,,Bangladesh,Mirpur
+#2484,2022-12-22,Test,3,,,,,,,Bangladesh,Mirpur
+#4501,2023-01-10,ODI,2,,,,,,,Sri Lanka,Guwahati
+#4503,2023-01-12,ODI,1,,,,,,,Sri Lanka,Kolkata
+#4505,2023-01-15,ODI,2,,,,,,,Sri Lanka,Thiruvananthapuram
+#4507,2023-01-18,ODI,2,,,,,,,New Zealand,Hyderabad
+#4509,2023-01-21,ODI,1,,,,,,,New Zealand,Raipur
+#4511,2023-01-24,ODI,2,,,,,,,New Zealand,Indore
+#2490,2023-02-09,Test,1,,,,,,,Australia,Nagpur
+#2490,2023-02-09,Test,3,,,,,,,Australia,Nagpur
+#2493,2023-02-17,Test,1,,,,,,,Australia,Delhi
+#2493,2023-02-17,Test,3,,,,,,,Australia,Delhi
+#2496,2023-03-01,Test,2,,,,,,,Australia,Indore
+#2496,2023-03-01,Test,4,,,,,,,Australia,Indore
+#2499,2023-03-09,Test,1,,,,,,,Australia,Ahmedabad
+#2499,2023-03-09,Test,3,,,,,,,Australia,Ahmedabad
+#4538,2023-03-17,ODI,1,,,,,,,Australia,Mumbai
+#4541,2023-03-19,ODI,2,,,,,,,Australia,Visakhapatnam
+#4545,2023-03-22,ODI,1,,,,,,,Australia,Chennai
+#2505,2023-06-07,Test,1,,,,,,,Australia,London
+#2505,2023-06-07,Test,3,,,,,,,Australia,London
+#2510,2023-07-12,Test,1,,,,,,,West Indies,Roseau
+#2510,2023-07-12,Test,3,,,,,,,West Indies,Roseau
+#2513,2023-07-20,Test,2,,,,,,,West Indies,Port of Spain
+#2513,2023-07-20,Test,4,,,,,,,West Indies,Port of Spain
+#4622,2023-07-27,ODI,1,,,,,,,West Indies,Bridgetown
+#4630,2023-09-02,ODI,,,,,,,,Pakistan,Pallekele
+#4632,2023-09-04,ODI,1,,,,,,,Nepal,Pallekele
+#4639,2023-09-10,ODI,2,,,,,,,Pakistan,Colombo
+#4641,2023-09-12,ODI,2,,,,,,,Sri Lanka,Colombo
+#4649,2023-09-17,ODI,1,,,,,,,Sri Lanka,Colombo
+#4657,2023-09-27,ODI,1,,,,,,,Australia,Rajkot
+#4662,2023-10-08,ODI,1,,,,,,,Australia,Chennai
+#4666,2023-10-11,ODI,1,,,,,,,Afghanistan,Delhi
+#4669,2023-10-14,ODI,1,,,,,,,Pakistan,Ahmedabad
+#4674,2023-10-19,ODI,1,4,0.3,0,2,0,4.00,Bangladesh,Pune
+#4678,2023-10-22,ODI,1,,,,,,,New Zealand,Dharamshala
+#4686,2023-10-29,ODI,2,,,,,,,England,Lucknow
+#4690,2023-11-02,ODI,2,,,,,,,Sri Lanka,Mumbai
+#4694,2023-11-05,ODI,2,,,,,,,South Africa,Kolkata
+#4702,2023-11-12,ODI,2,6,3.0,0,13,1,4.33,Netherlands,Bengaluru
+#4703,2023-11-15,ODI,2,,,,,,,New Zealand,Mumbai
+#4705,2023-11-19,ODI,2,,,,,,,Australia,Ahmedabad
+#2520,2023-12-26,Test,2,,,,,,,South Africa,Centurion
+#2522,2024-01-03,Test,1,,,,,,,South Africa,Cape Town
+#2522,2024-01-03,Test,3,,,,,,,South Africa,Cape Town
+#2431,2024-01-14,T20I,1,,,,,,,Afghanistan,Indore
+#2435,2024-01-17,T20I,2,,,,,,,Afghanistan,Bengaluru
+#2639,2024-06-05,T20I,1,,,,,,,Ireland,New York
+#2658,2024-06-09,T20I,2,,,,,,,Pakistan,New York
+#2671,2024-06-12,T20I,1,,,,,,,U.S.A.,New York
+#2710,2024-06-20,T20I,2,,,,,,,Afghanistan,Bridgetown
+#2716,2024-06-22,T20I,2,,,,,,,Bangladesh,North Sound
+#2721,2024-06-24,T20I,2,,,,,,,Australia,Gros Islet
+#2724,2024-06-27,T20I,2,,,,,,,England,Providence Guyana
+#2729,2024-06-29,T20I,2,,,,,,,South Africa,Bridgetown
+#4752,2024-08-02,ODI,1,,,,,,,Sri Lanka,Colombo
+#4753,2024-08-04,ODI,1,,,,,,,Sri Lanka,Colombo
+#4754,2024-08-07,ODI,1,,,,,,,Sri Lanka,Colombo
+#2550,2024-09-19,Test,2,,,,,,,Bangladesh,Chennai
+#2550,2024-09-19,Test,4,,,,,,,Bangladesh,Chennai
+#2552,2024-09-27,Test,1,,,,,,,Bangladesh,Kanpur
+#2552,2024-09-27,Test,3,,,,,,,Bangladesh,Kanpur
+#2555,2024-10-16,Test,2,,,,,,,New Zealand,Bengaluru
+#2555,2024-10-16,Test,4,,,,,,,New Zealand,Bengaluru
+#2557,2024-10-24,Test,1,,,,,,,New Zealand,Pune
+#2557,2024-10-24,Test,3,,,,,,,New Zealand,Pune
+#2560,2024-11-01,Test,1,,,,,,,New Zealand,Mumbai
+#2560,2024-11-01,Test,3,,,,,,,New Zealand,Mumbai
+#2561,2024-11-22,Test,2,,,,,,,Australia,Perth
+#2561,2024-11-22,Test,4,,,,,,,Australia,Perth
+#2568,2024-12-06,Test,2,,,,,,,Australia,Adelaide
+#2568,2024-12-06,Test,4,,,,,,,Australia,Adelaide
+#2570,2024-12-14,Test,1,,,,,,,Australia,Brisbane
+#2570,2024-12-14,Test,3,,,,,,,Australia,Brisbane
+#2571,2024-12-26,Test,1,,,,,,,Australia,Melbourne
+#2571,2024-12-26,Test,3,,,,,,,Australia,Melbourne
+#2575,2025-01-03,Test,2,,,,,,,Australia,Sydney
+#2575,2025-01-03,Test,4,,,,,,,Australia,Sydney
+#4828,2025-02-09,ODI,1,,,,,,,England,Cuttack
+#4833,2025-02-12,ODI,2,,,,,,,England,Ahmedabad
