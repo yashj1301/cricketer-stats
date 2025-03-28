@@ -5,7 +5,12 @@ V2
 3. Modify the code cleaning - remove unnecessary columns based on player's role. Eg. for batters, remove wicketkeeper columns etc.  
 
 V3
-1. Documentation and proper linting for transformer.py and loader.py 
+1. Documentation and proper linting for all 3 modules. 
 2. Development container for each project. 
 3. Inheritance between the modules.
+4. "Data Type" class variable - use only in upload and download functions to avoid making multiple objects of Loader class. 
+
+V4
+1. Parameterization for Players and bucket name.
+2. Prepare wiki for the Project. 
 

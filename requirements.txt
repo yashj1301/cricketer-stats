@@ -1,7 +1,5 @@
-numpy==2.2.1
-pandas==2.2.3
-requests==2.32.3
-regex==2024.11.6
-selenium==4.28.0
-google-cloud-biquery==3.29.0
-
+pandas
+numpy
+selenium
+webdriver-manager
+google-cloud-storage

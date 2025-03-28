@@ -23,6 +23,8 @@ class Cricketer_Stats_Scraper:
         # Set up the WebDriver and open the search URL
         options = webdriver.ChromeOptions()
         options.add_argument("--headless")  # Run in headless mode
+        options.add_argument("user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36")
+        
         print("Setting up WebDriver...")
         self.driver = webdriver.Chrome(service=Service(ChromeDriverManager().install()), options=options)
 
@@ -33,16 +35,25 @@ class Cricketer_Stats_Scraper:
         start_time = time.time()
         print(f"Extracting {self.player_name}'s player URL and Player ID....")
         search_url = f"https://search.espncricinfo.com/ci/content/site/search.html?search={self.player_name.lower().replace(' ', '%20')};type=player"
-        self.driver.get(search_url)
+        
 
         try:
+
+            # Open the search URL
+            self.driver.get(search_url)
+
+            # Extract the player ID and URL from the search results
             player_link_element = self.driver.find_element(By.CSS_SELECTOR, "h3.name.link-cta a")
             self.player_url = player_link_element.get_attribute("href")
             self.player_id = self.player_url.split('-')[-1]
+            
+            # record the time taken
             print(f"Extraction Successful for {self.player_name}.")
             end_time = time.time()
             print(f"Time taken to extract URL: {end_time - start_time:.2f} seconds")
+        
         except Exception as e:
+            
             print(f"Error in extracting {self.player_name}'s url:", e)
             return None, None
 
@@ -107,7 +118,7 @@ class Cricketer_Stats_Scraper:
             print(f"Error in extracting {self.player_name}'s personal info:", e)
             return None
 
-    def get_player_stats(self, stats_type="all", export=True):
+    def get_player_stats(self, stats_type="all"):
         try:
             # Ensure that player_id is available
             if not self.player_id:
@@ -134,37 +145,11 @@ class Cricketer_Stats_Scraper:
 
             # Fetch fielding stats if 'all' or 'fielding' is passed
             if stats_type == "all" or stats_type == "fielding":
-                self.fieldingstats = self.extract_inns_data('fielding')
-
-            
-            # Export scraped data to CSV files if export is True
-            if export:
-                if self.battingstats is not None:
-                    self.export_scraped_data(self.battingstats, 'batting')
-                if self.bowlingstats is not None:
-                    self.export_scraped_data(self.bowlingstats, 'bowling')
-                if self.fieldingstats is not None:
-                    self.export_scraped_data(self.fieldingstats, 'fielding')
-                if self.allroundstats is not None:
-                    self.export_scraped_data(self.allroundstats, 'allround')
-                if self.player_info is not None:
-                    self.export_scraped_data(self.player_info, 'personal_info')
-                    
+                self.fieldingstats = self.extract_inns_data('fielding')        
 
         except Exception as e:
             print(f"Error in extracting stats for {self.player_name}: ", e)
 
-    def export_scraped_data(self, df, stat_type):
-        """
-        Export the scraped data (batting, bowling, fielding, allround, personalinfo) to CSV format.
-        """
-        try:
-
-            file_name = f"data/raw_{self.player_name.lower().replace(' ', '_')}_{stat_type}_stats.csv"
-            df.to_csv(file_name, mode='w',index=False)
-            print(f"{stat_type.capitalize()} stats exported to {file_name}")
-        except Exception as e:
-            print(f"Error while exporting {stat_type} stats: {e}")
 
     def __del__(self):
         try:
