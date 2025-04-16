@@ -1,9 +1,25 @@
 import pandas as pd
-from google.cloud import storage
-from io import BytesIO
+import boto3
+import botocore.exceptions
+from io import StringIO
+from dotenv import load_dotenv
+import os
 
-class CricketerStatsLoader:
+load_dotenv()  # Load AWS credentials from .env
+
+s3 = boto3.client("s3")
+
+class LoadData:
+
     def __init__(self, player_name, data_type="raw"):
+        
+        """
+        Initializes the CricketerStatsLoader with player name and data type.
+        Args:
+            player_name (str): Name of the player.
+            data_type (str): Type of data ('raw' or 'tf').
+        """
+
         self.player_name = player_name.lower().replace(" ", "_")
         self.data_type = data_type  # 'raw' or 'tf'
         self.battingstats = None
@@ -13,103 +29,158 @@ class CricketerStatsLoader:
         self.player_info = None
 
     def ensure_bucket_exists(self, bucket_name):
-        """Checks if the bucket exists; if not, creates it."""
-        client = storage.Client()
-        bucket = client.lookup_bucket(bucket_name)
 
-        if not bucket:
-            print(f"Bucket '{bucket_name}' does not exist. Creating it...")
-            bucket = client.create_bucket(bucket_name)
-            print(f"Bucket '{bucket_name}' created successfully.")
-        else:
-            print(f"Bucket '{bucket_name}' already exists.")
+        """Checks if the S3 bucket exists, and creates it if not."""
+        
+        try:
+            s3.head_bucket(Bucket=bucket_name)
+            print(f"✅ Bucket '{bucket_name}' already exists.")
+        
+        except botocore.exceptions.ClientError as e:
+            error_code = int(e.response["Error"]["Code"])
+            
+            if error_code == 404:
+                print(f"⚠️ Bucket '{bucket_name}' does not exist. Creating...")
+                s3.create_bucket(
+                    Bucket=bucket_name,
+                    CreateBucketConfiguration={
+                        'LocationConstraint': os.getenv("AWS_DEFAULT_REGION")
+                                            }
+                )
+                
+                print(f"✅ Bucket '{bucket_name}' created successfully.")
+            
+            else: raise e
+    
+    def upload_df(self, bucket_name, object_key, df):
 
-    def upload_df_to_gcs(self, bucket_name, destination_blob_name, df):
-        """Uploads a Pandas DataFrame as a CSV file to Google Cloud Storage."""
+        """Uploads a Pandas DataFrame as a CSV file to S3."""
+
         if df is None or df.empty:
-            print(f"Warning: {destination_blob_name} is empty, skipping upload.")
+            print(f"Warning: {object_key} is empty, skipping upload.")
             return
 
-        client = storage.Client()
-        bucket = client.bucket(bucket_name)
-        blob = bucket.blob(destination_blob_name)
+        csv_buffer = StringIO()
+        df.to_csv(csv_buffer, index=False)
 
-        # Convert DataFrame to CSV in memory (Binary Buffer)
-        buffer = BytesIO()
-        df.to_csv(buffer, index=False)
-        buffer.seek(0)  # Reset buffer position
+        s3.put_object(
+            Bucket=bucket_name,
+            Key=object_key,
+            Body=csv_buffer.getvalue(),
+            ContentType="text/csv"
+        )
 
-        # Upload directly from memory
-        blob.upload_from_file(buffer, content_type="text/csv")
-        print(f"File uploaded to GCS: gs://{bucket_name}/{destination_blob_name}")
+        print(f" Uploaded to s3://{bucket_name}/{object_key}")
 
-    def download_df_from_gcs(self, bucket_name, stat_type):
-        """Downloads a specific type of cricket stats from GCS into a Pandas DataFrame.
-    
-        Args:
-            bucket_name (str): Google Cloud Storage bucket name.
-            stat_type (str): Type of data to fetch (e.g., "batting", "bowling", "fielding", "allround", "personal_info").
-    
-        Returns:
-            pd.DataFrame: The downloaded DataFrame, or None if the file is missing.
-        """
-        # Construct the full GCS path based on the player name, data type, and stat type
+    def download_df(self, bucket_name, stat_type):
+
+        """Downloads a cricket stat CSV from S3 into a DataFrame."""
+
         file_name_map = {
             "batting": "batting_stats.csv",
             "bowling": "bowling_stats.csv",
             "fielding": "fielding_stats.csv",
             "allround": "allround_stats.csv",
             "personal_info": "personal_info.csv"
-                        }
+        }
+
+        '''If 'all' is passed, download all stat types
+        if stat_type == "all":
+            data = {}
+            for stat in file_name_map:
+                data[stat] = self.download_df(bucket_name, stat)  # Recursively call download_df for each type
+            return data
+        '''
 
         if stat_type not in file_name_map:
-            print(f"Error: Invalid stat_type '{stat_type}'. Choose from {list(file_name_map.keys())}.")
+            print(f" Invalid stat_type '{stat_type}'.")
             return None
 
-        # Define the GCS blob name based on the structure
-        source_blob_name = f"{self.player_name}/{self.data_type}/{file_name_map[stat_type]}"
-
-        # Initialize GCS client and fetch the file
-        client = storage.Client()
-        bucket = client.bucket(bucket_name)
-        blob = bucket.blob(source_blob_name)
+        object_key = f"{self.player_name}/{self.data_type}/{file_name_map[stat_type]}"
 
         try:
-            csv_data = blob.download_as_text()
-            df = pd.read_csv(BytesIO(csv_data.encode()))
-            print(f"Successfully downloaded {stat_type} data from gs://{bucket_name}/{source_blob_name}")
+
+            response = s3.get_object(Bucket=bucket_name, Key=object_key)
+            content = response["Body"].read().decode("utf-8")
+            df = pd.read_csv(StringIO(content))
+            print(f" Downloaded from s3://{bucket_name}/{object_key}")
             return df
+        
         except Exception as e:
             print(f"Error downloading {stat_type} stats: {e}")
             return None
 
-
-    def load_data(self, bucket_name):
+    def load_data(self, bucket_name, load_type, stat_type="all"):
+    
         """
-        Uploads data to GCS in a structured format.
-        - bucket_name: Name of the GCS bucket.
-        """
-        print(f"Uploading {self.player_name}'s {self.data_type} data to GCS...")
+        Loads cricket stats data to/from S3.
 
-        # Ensure bucket exists before uploading
+        Args:
+            bucket_name (str): Name of the S3 bucket.
+            load_type (str): Type of load operation ('upload' or 'download').
+            stat_type (str): Type of stats to load ('all', 'batting', 'bowling', 'fielding', 'allround', 'personal_info').
+        """            
+        
+        if load_type not in ["upload", "download"]:
+            print(f"Invalid load type '{load_type}'. Must be 'upload' or 'download'.")
+            return
+
+        if stat_type not in ["all", "batting", "bowling", "fielding", "allround", "personal_info"]:
+            print(f"Invalid stat type '{stat_type}'. Must be 'all', 'batting', 'bowling', 'fielding', 'allround', or 'personal_info'.")
+            return
+
+        # Ensure the S3 bucket exists
         self.ensure_bucket_exists(bucket_name)
 
-        # Define the base folder (`player_name/raw/` or `player_name/tf/`)
-        base_folder = f"{self.player_name}/{self.data_type}/"
+        # Perform the upload operation
+        if load_type == "upload":
 
-        if self.battingstats is not None:
-            self.upload_df_to_gcs(bucket_name, base_folder + "batting_stats.csv", self.battingstats)
+            print(f"Uploading {self.player_name}'s {self.data_type} {stat_type} data to S3...")
+            
+            base_folder = f"{self.player_name}/{self.data_type}/"
 
-        if self.bowlingstats is not None:
-            self.upload_df_to_gcs(bucket_name, base_folder + "bowling_stats.csv", self.bowlingstats)
+            if self.battingstats is not None and stat_type in ["all", "batting"]:
+                self.upload_df(bucket_name, base_folder + "batting_stats.csv", self.battingstats)
 
-        if self.fieldingstats is not None:
-            self.upload_df_to_gcs(bucket_name, base_folder + "fielding_stats.csv", self.fieldingstats)
+            if self.bowlingstats is not None and stat_type in ["all", "bowling"]:
+                self.upload_df(bucket_name, base_folder + "bowling_stats.csv", self.bowlingstats)
 
-        if self.allroundstats is not None:
-            self.upload_df_to_gcs(bucket_name, base_folder + "allround_stats.csv", self.allroundstats)
+            if self.fieldingstats is not None and stat_type in ["all", "fielding"]:
+                self.upload_df(bucket_name, base_folder + "fielding_stats.csv", self.fieldingstats)
 
-        if self.player_info is not None:
-            self.upload_df_to_gcs(bucket_name, base_folder + "personal_info.csv", self.player_info)
+            if self.allroundstats is not None and stat_type in ["all", "allround"]:
+                self.upload_df(bucket_name, base_folder + "allround_stats.csv", self.allroundstats)
 
-        print(f"All {self.data_type} data successfully uploaded to GCS in gs://{bucket_name}/{base_folder}")
+            if self.player_info is not None and stat_type in ["all", "personal_info"]:
+                self.upload_df(bucket_name, base_folder + "personal_info.csv", self.player_info)
+
+            print(f"All {self.data_type} data uploaded to s3://{bucket_name}/{base_folder}")
+
+        # Perform the download operation
+        elif load_type == "download":
+
+            print(f"Downloading {self.player_name}'s {self.data_type} data from S3...")
+
+            if stat_type in ["all", "personal_info"]:
+                self.player_info = self.download_df(bucket_name, "personal_info")
+
+            if stat_type in ["all", "batting"]:
+                self.battingstats = self.download_df(bucket_name, "batting")
+
+            if stat_type in ["all", "bowling"]:
+                self.bowlingstats = self.download_df(bucket_name, "bowling")
+
+            if stat_type in ["all", "fielding"]:
+                self.fieldingstats = self.download_df(bucket_name, "fielding")
+
+            if stat_type in ["all", "allround"]:
+
+                # Download allround stats if PLAYING ROLE is "Allrounder"
+                if self.player_info is not None and "Allrounder" in self.player_info["PLAYING ROLE"].values:
+                    self.allroundstats = self.download_df(bucket_name, "allround")
+                
+                else:
+                    print(f"Warning: Player {self.player_name} is not an Allrounder. Skipping allround stats download.")
+                    self.allroundstats = None
+                
+            print(f"All {self.data_type} data downloaded from s3://{bucket_name}/{self.player_name}/{self.data_type}/")
