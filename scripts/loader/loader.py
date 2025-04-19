@@ -34,13 +34,13 @@ class LoadData:
         
         try:
             s3.head_bucket(Bucket=bucket_name)
-            print(f"✅ Bucket '{bucket_name}' already exists.")
+            print(f"Bucket '{bucket_name}' already exists.")
         
         except botocore.exceptions.ClientError as e:
             error_code = int(e.response["Error"]["Code"])
             
             if error_code == 404:
-                print(f"⚠️ Bucket '{bucket_name}' does not exist. Creating...")
+                print(f"Bucket '{bucket_name}' does not exist. Creating...")
                 s3.create_bucket(
                     Bucket=bucket_name,
                     CreateBucketConfiguration={
@@ -48,7 +48,7 @@ class LoadData:
                                             }
                 )
                 
-                print(f"✅ Bucket '{bucket_name}' created successfully.")
+                print(f"Bucket '{bucket_name}' created successfully.")
             
             else: raise e
     

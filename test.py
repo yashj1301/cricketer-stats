@@ -1,6 +1,6 @@
-from scripts.scraper.scraper import Cricketer_Stats_Scraper as ScrapeData
-from scripts.transformer.transformer import Cricketer_Stats_Transformer as TransformData
-from scripts.loader.loader import CricketerStatsLoader as LoadData
+from scraper import ScrapeData
+from transformer import TransformData
+from loader import LoadData
 import pandas as pd
 
 # --- 🔹 Step 1: Scrape raw data ---
@@ -9,7 +9,7 @@ virat_raw = ScrapeData(player_name)
 virat_raw.get_player_stats()
 
 # --- 🔹 Step 2: Upload raw data to S3 ---
-bucket_name = "cricketer_stats"
+bucket_name = "cricketer-stats"
 virat_raw_loader = LoadData(player_name, data_type="raw")
 
 virat_raw_loader.battingstats = virat_raw.battingstats

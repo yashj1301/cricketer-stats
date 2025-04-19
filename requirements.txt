@@ -2,4 +2,6 @@ pandas
 numpy
 selenium
 webdriver-manager
-google-cloud-storage
+undetected-chromedriver
+boto3
+python-dotenv
