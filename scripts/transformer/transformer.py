@@ -2,7 +2,7 @@ import time
 import pandas as pd
 import numpy as np
 
-class Cricketer_Stats_Transformer:
+class TransformData:
     
     def __init__(self, player_name):
         self.player_name = player_name
