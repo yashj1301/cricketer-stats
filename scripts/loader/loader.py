@@ -1,6 +1,6 @@
 import pandas as pd
 import boto3
-import botocore.exceptions
+from botocore.exceptions import ClientError
 from io import StringIO
 from dotenv import load_dotenv
 import os
@@ -28,7 +28,7 @@ class LoadData:
         self.allroundstats = None
         self.player_info = None
 
-    def ensure_bucket_exists(self, bucket_name):
+    def ensure_bucket_exists(self, bucket_name, flag=0):
 
         """Checks if the S3 bucket exists, and creates it if not."""
         
@@ -36,19 +36,22 @@ class LoadData:
             s3.head_bucket(Bucket=bucket_name)
             print(f"Bucket '{bucket_name}' already exists.")
         
-        except botocore.exceptions.ClientError as e:
+        except ClientError as e:
             error_code = int(e.response["Error"]["Code"])
             
             if error_code == 404:
-                print(f"Bucket '{bucket_name}' does not exist. Creating...")
-                s3.create_bucket(
-                    Bucket=bucket_name,
-                    CreateBucketConfiguration={
-                        'LocationConstraint': os.getenv("AWS_DEFAULT_REGION")
-                                            }
-                )
-                
-                print(f"Bucket '{bucket_name}' created successfully.")
+                print(f"Bucket '{bucket_name}' does not exist.")
+
+                if flag == 1:
+                    
+                    print(f"Creating bucket '{bucket_name}'...")
+                    s3.create_bucket(
+                        Bucket=bucket_name,
+                        CreateBucketConfiguration={
+                            'LocationConstraint': os.getenv("AWS_DEFAULT_REGION")
+                                                }
+                    )
+                    print(f"Bucket '{bucket_name}' created successfully.")
             
             else: raise e
     
@@ -84,13 +87,6 @@ class LoadData:
             "personal_info": "personal_info.csv"
         }
 
-        '''If 'all' is passed, download all stat types
-        if stat_type == "all":
-            data = {}
-            for stat in file_name_map:
-                data[stat] = self.download_df(bucket_name, stat)  # Recursively call download_df for each type
-            return data
-        '''
 
         if stat_type not in file_name_map:
             print(f" Invalid stat_type '{stat_type}'.")
@@ -129,11 +125,11 @@ class LoadData:
             print(f"Invalid stat type '{stat_type}'. Must be 'all', 'batting', 'bowling', 'fielding', 'allround', or 'personal_info'.")
             return
 
-        # Ensure the S3 bucket exists
-        self.ensure_bucket_exists(bucket_name)
-
         # Perform the upload operation
         if load_type == "upload":
+
+            # Ensure the S3 bucket exists
+            self.ensure_bucket_exists(bucket_name,flag=1)
 
             print(f"Uploading {self.player_name}'s {self.data_type} {stat_type} data to S3...")
             
@@ -158,6 +154,9 @@ class LoadData:
 
         # Perform the download operation
         elif load_type == "download":
+
+            # Ensure the S3 bucket exists
+            self.ensure_bucket_exists(bucket_name)
 
             print(f"Downloading {self.player_name}'s {self.data_type} data from S3...")
 

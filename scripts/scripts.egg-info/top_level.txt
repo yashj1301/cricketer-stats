@@ -1,3 +1,0 @@
-loader
-scraper
-transformer

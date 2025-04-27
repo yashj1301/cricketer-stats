@@ -1,5 +1,5 @@
-from scripts.scraper.scraper import ScrapeData
-from scripts.loader.loader import LoadData
+from scraper import ScrapeData
+from loader import LoadData
 
 def main():
     # ─────────── CONFIG ───────────
