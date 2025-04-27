@@ -20,7 +20,7 @@ The data collected is stored in AWS S3 Buckets and displayed through Power BI da
   Defines this project as a Python package.  
   - Specifies metadata (name, version, author, etc.)  
   - Reads dependencies from `requirements.txt`  
-  - Allows us to install your scraper/transformer/loader modules with:
+  - Allows us to install the scraper/transformer/loader modules with:
     ```bash
     pip install -e . # from project root directory
     ```
@@ -33,7 +33,7 @@ The data collected is stored in AWS S3 Buckets and displayed through Power BI da
   3. MWAA pulls the images and runs the scraper/transformer/loader containers.  
   4. Final data lands in S3 and is consumed by Power BI  
   
-  It’s your “single source of truth” for how all the pieces fit together.
+  It’s our “single source of truth” for how all the pieces fit together.
 
 - **`extras.txt`**  
   A rolling backlog of future enhancements and feature ideas, for example:  

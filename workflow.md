@@ -60,12 +60,12 @@ To build and deploy a modular data pipeline that scrapes, transforms, and loads 
 ---
 
 #### GitHub Actions  
-1. **Create an IAM user** in your AWS account with only the permissions your pipeline needs, for example:  
-   - `AmazonS3FullAccess` (for reading/writing your buckets)  
-   - `AmazonECRFullAccess` (if you push/pull Docker images)  
-   - `AmazonMWAAFullAccess` (if you deploy or update MWAA DAGs)  
+1. **Create an IAM user** in our AWS account with only the permissions the pipeline needs, for example:  
+   - `AmazonS3FullAccess` (for reading/writing buckets)  
+   - `AmazonECRFullAccess` (if we push/pull Docker images)  
+   - `AmazonMWAAFullAccess` (if we deploy or update MWAA DAGs)  
 2. **Generate an access key** (Access Key ID & Secret Access Key) for that user.  
-3. In your GitHub repository, go to **Settings → Secrets and variables → Actions → New repository secret**, and add:  
+3. In our GitHub repository, go to **Settings → Secrets and variables → Actions → New repository secret**, and add:  
    - `AWS_ACCESS_KEY_ID`  
    - `AWS_SECRET_ACCESS_KEY`  
    - `AWS_REGION`

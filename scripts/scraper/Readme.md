@@ -12,9 +12,9 @@ The `scraper.py` module defines the **`ScrapeData`** class (alias for `Cricketer
 - **pandas**  
 - **selenium**  
 - **webdriver_manager**  
-- **undetected_chromedriver** (if used)  
+- **undetected_chromedriver**  
 
-Make sure you have a compatible ChromeDriver installed or let `webdriver_manager` install it automatically.
+Make sure to have a compatible ChromeDriver installed or let `webdriver_manager` install it automatically.
 
 ---
 
@@ -37,7 +37,7 @@ def __init__(self, player_name: str):
     """
     Initializes the ScrapeData object.
     - Stores `player_name`.
-    - Launches a headless Chrome WebDriver.
+    - Launches a Chrome WebDriver.
     - Automatically calls `get_player_url()` to populate:
         - self.player_url
         - self.player_id
@@ -47,7 +47,7 @@ __Parameters__
 
 `player_name` (str): Full name of the cricketer to scrape.
 
-__Extras__
+__Result__
 
 calls `get_player_url()` to fetch player id and player url as soon as object is created. 
 
@@ -59,13 +59,14 @@ def get_player_url(self) -> None:
     """
     Searches ESPN CricInfo for `self.player_name`,
     extracts the first matching profile URL and player ID.
+    
     Updates:
       - self.player_url (str)
       - self.player_id  (str)
     """
 ```
 
-It extracts the player url and player id from the website, and stores to instance variables. 
+It extracts the __player url__ and __player id__ from the website, and stores to instance variables. 
 
 #### 3. `extract_inns_data(self, record_type)`
 
@@ -73,8 +74,10 @@ It extracts the player url and player id from the website, and stores to instanc
 def extract_inns_data(self, record_type: str) -> pd.DataFrame:
     """
     Scrapes innings-level stats for the given `record_type`.
+    
     Args:
       record_type (str): One of "batting", "bowling", "fielding", "allround".
+    
     Returns:
       pd.DataFrame: Tabular stats for each innings, with columns like "Runs", "Overs", etc.
     """
@@ -91,6 +94,7 @@ def extract_player_info(self) -> pd.DataFrame:
     """
     Visits the player profile page (`self.player_url`) and extracts
     personal details (name, country, age, playing role).
+    
     Returns:
       pd.DataFrame: Single-row DataFrame with columns "Player ID", "Player URL", plus other personal info fields.
     """
@@ -104,13 +108,16 @@ Returns DataFrame of personal info for the player (or None on failure).
 def get_player_stats(self, stats_type: str = "all") -> None:
     """
     Orchestrates the full scraping process.
+    
     Args:
       stats_type (str):  
         - "batting", "bowling", "fielding", "allround", "personal_info", or "all" (default).
+    
     Behavior:
       - Calls `extract_player_info()` if needed.
       - Calls `extract_inns_data()` for each requested stat.
       - Exports each DataFrame to CSV if `export=True`.
+    
     Updates:
       - self.battingstats, self.bowlingstats, self.fieldingstats,
         self.allroundstats, self.player_info

@@ -2,7 +2,7 @@
 
 ### Overview
 
-The `transformer.py` module defines the **`TransformData`** class, which cleans and casts raw cricketer innings data into analysis-ready tables. It handles value replacements, column extraction, renaming, date parsing, ID formatting, and explicit dtype casting.
+The `transformer.py` module defines the **`TransformData`** class, which cleans and casts raw cricketer innings data into analysis-ready tables. It handles value replacements, column extraction, renaming, date parsing, ID formatting, and explicit data type casting.
 
 ---
 
@@ -34,7 +34,8 @@ def __init__(self, player_name: str):
     """
     Args:
       player_name: full name of the cricketer (e.g. "Virat Kohli").
-    Side-effects:
+    
+    Outcomes:
       - Sets `self.player_name`.
       - Initializes placeholders: `player_info`, `battingstats`,
         `bowlingstats`, `fieldingstats`, `allroundstats`,
@@ -42,9 +43,9 @@ def __init__(self, player_name: str):
     """
 ```
 
-Establishes the object’s state; we must later assign raw DataFrames to the stats attributes before calling `process_data()`.
+Establishes the object’s state; must later assign raw DataFrames to the stats attributes before calling `process_data()`.
 
-#### 2. transform_data(self, df)
+#### 2. `transform_data(self, df)`
 
 ```python
 def transform_data(self, df: pd.DataFrame) -> pd.DataFrame:
@@ -55,6 +56,7 @@ def transform_data(self, df: pd.DataFrame) -> pd.DataFrame:
       3. Normalizes certain ground names and renames to `Location`.
       4. Casts `Start Date` to datetime64.
       5. Prefixes match numbers with “#” and renames to `Match ID`.
+    
     Returns:
       A cleaned DataFrame.
     """
@@ -66,7 +68,7 @@ __Parameters:__
 
 __Returns:__ new DataFrame after all five transformation steps.
 
-#### 3. final_df(self, df, common_cols, custom_cols)
+#### 3. `final_df(self, df, common_cols, custom_cols)`
 
 ```python
 def final_df(self,
@@ -75,16 +77,19 @@ def final_df(self,
              custom_cols: list) -> pd.DataFrame:
     """
     Applies `transform_data()`, selects and reorders columns, and casts dtypes.
+    
     Args:
       common_cols: list of columns present in every stats table
         (e.g. ['Match ID','Start Date','Format','Inns','Opposition','Location'])
       custom_cols: list of stats-specific columns
         (e.g. batting: ['Pos','Runs','BF',…])
+    
     Behavior:
       - Cleans via `transform_data()`.
       - Reorders to: common_cols[:-2] + custom_cols + common_cols[-2:].
       - Casts each column to a pre-defined dtype mapping (Int64, float64, etc.).  
       - Logs any casting failures per column.
+    
     Returns:
       The typed, trimmed DataFrame ready for analysis.
     """
@@ -98,15 +103,17 @@ __Parameters:__
 
 __Returns:__ a fully cleaned & typed DataFrame.
 
-#### 4. process_data(self, type="all")
+#### 4. `process_data(self, type="all")`
 
 ```python
 def process_data(self, type: str = "all") -> None:
     """
     Drives end-to-end transformation for one or all stat types.
+    
     Args:
       type: one of "batting","bowling","fielding","allround","all"
-    Side-effects:
+    
+    Outcomes:
       - Prints processing status.
       - For each requested type, calls `final_df()` and assigns to
         self.battingstats, self.bowlingstats, self.fieldingstats,

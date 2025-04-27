@@ -14,13 +14,13 @@ The `loader.py` script defines the **`LoadData`** class, which manages uploading
 - **io** (standard library)  
 - **os** (standard library)
 
-Make sure you have a `.env` file (git-ignored) in your project root with:
+Make sure to have a `.env` file (git-ignored) in the project root with:
 ```bash
 AWS_ACCESS_KEY_ID=...
 AWS_SECRET_ACCESS_KEY=...
 AWS_DEFAULT_REGION=...
 ```
-and that you call `load_dotenv()` before using boto3.
+and call `load_dotenv()` before using boto3.
 
 ### Class Definition
 ```python
@@ -59,7 +59,7 @@ def ensure_bucket_exists(self, bucket_name: str, flag: int):
     """
 ```
 
-It calls s3.head_bucket() to check bucket existence. If a __404/NoSuchBucket__ error is returned, it calls s3.create_bucket() with the region from `AWS_DEFAULT_REGION` only on upload (this is checked through flag=1); Otherwise re-raises unexpected errors.
+It calls `s3.head_bucket()` to check bucket existence. If a __404/NoSuchBucket__ error is returned, it calls `s3.create_bucket()` with the region from `AWS_DEFAULT_REGION` only on upload (this is checked through flag=1); Otherwise re-raises unexpected errors.
 
 #### 3. `upload_df()`
 
@@ -97,8 +97,9 @@ Prints the S3 path on success.
 def load_data(self, bucket_name: str, load_type: str, stat_type: str = "all"):
     """
     High-level method for upload/download of one or all stat types.
+    
     Args:
-      bucket_name: your S3 bucket name
+      bucket_name: the S3 bucket name
       load_type:   "upload" or "download"
       stat_type:   "all" or any single stat_type (batting, bowling, etc.)
     """
@@ -106,7 +107,7 @@ def load_data(self, bucket_name: str, load_type: str, stat_type: str = "all"):
 __Flow:__
 
 1. It Validates load_type [upload, download] and stat_type [all, batting, bowling, fielding, allround, personal_info]. 
-2. It then calls ensure_bucket_exists(bucket_name).
+2. It then calls `ensure_bucket_exists(bucket_name)`.
 3. On upload only, if the bucket is missing, it will be created. Else, nothing. 
 4. For upload: iterate through each non-None DataFrame attribute (battingstats, bowlingstats, etc.) and call `upload_df()`.
 5. For download: call `download_df()` for each requested stat type and assign back to the corresponding class attribute.
