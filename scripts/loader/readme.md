@@ -1,125 +1,145 @@
-<u><h2>Documentation for loader.py</h2></u>
+## Documentation for `loader.py`
 
-<h3>Overview</h3>
+### Overview
 
-The `loader.py` script defines the **DataLoader** class, which handles incremental data loading. It is responsible for loading, saving, and appending new review data to a CSV file, ensuring that there are no duplicate records. It performs the following tasks:
+The `loader.py` script defines the **`LoadData`** class, which manages uploading and downloading of cricketer statistics to and from an AWS S3 bucket. It supports both raw and transformed data, and will create the target bucket on upload if it does not already exist.
 
-1. Checks if an existing data file is available.
-2. Loads existing data if present.
-3. Saves new data to the file, ensuring that only new records are appended.
-4. Handles the case where the data file does not exist, creating a new file.
+---
 
-<h3>Requirements</h3> 
+### Requirements
 
-The following Python libraries are required:
-- `pandas`: For data manipulation and reading/writing CSV files.
-- `os`: For checking file existence.
+- **pandas**  
+- **boto3**  
+- **python-dotenv**  
+- **io** (standard library)  
+- **os** (standard library)
 
-<h3>Class Definition</h3>
-class DataLoader: The class encapsulates the logic for loading and saving review data.
+Make sure you have a `.env` file (git-ignored) in your project root with:
+```bash
+AWS_ACCESS_KEY_ID=...
+AWS_SECRET_ACCESS_KEY=...
+AWS_DEFAULT_REGION=...
+```
+and that you call `load_dotenv()` before using boto3.
 
-<h4>1. Class Constructor</h4>
+### Class Definition
+```python
+class LoadData:
+    def __init__(self, player_name: str, data_type: str = "raw"):
+        ...
+    def ensure_bucket_exists(self, bucket_name: str, flag: int):
+        ...
+    def upload_df(self, bucket_name: str, object_key: str, df: pd.DataFrame):
+        ...
+    def download_df(self, bucket_name: str, stat_type: str) -> Optional[pd.DataFrame]:
+        ...
+    def load_data(self, bucket_name: str, load_type: str, stat_type: str = "all"):
+        ...
+```
+#### 1. Constructor
 
-    def __init__(self, file_path):
+```python
+def __init__(self, player_name: str, data_type: str = "raw"):
     """
-    Initializes the DataLoader with the file path to save/load data.
     Args:
-    file_path (str): The path to the CSV file where data will be saved.
+      player_name: e.g. "Virat Kohli" (will be normalized to lowercase/underscores)
+      data_type:   "raw" or "tf" (transformed)
     """
-    
-<u>Purpose</u>: Sets up the initial state for the data loader, including file_path: Path to the CSV file for saving/loading data.
+```
 
-<h4>2. Method: load_existing_data</h4>
+It stores the player name and data type ("raw" or transformed, i.e. "tf"), initialize placeholders for each stats DataFrame.
 
-        def load_existing_data(self):
-        """
-        Loads existing data from the specified file if it exists.
-        Returns:
-            pd.DataFrame: Existing data (empty DataFrame if file doesn't exist).
-        """
-<u>Purpose</u>: Loads the existing data from the specified CSV file. If the file doesn't exist, it returns an empty DataFrame.
+#### 2. `ensure_bucket_exists()`
 
-<u>Logic</u>: Checks if the file exists and reads it into a DataFrame. If no file is found, an empty DataFrame is returned.
+```python
+def ensure_bucket_exists(self, bucket_name: str, flag: int):
+    """
+    - Checks if `bucket_name` exists in S3.
+    - On upload (checked through flag = 1), if missing, creates it in AWS_DEFAULT_REGION.
+    """
+```
 
-<h4>3. Method: save_data</h4>
+It calls s3.head_bucket() to check bucket existence. If a __404/NoSuchBucket__ error is returned, it calls s3.create_bucket() with the region from `AWS_DEFAULT_REGION` only on upload (this is checked through flag=1); Otherwise re-raises unexpected errors.
 
-    def save_data(self, data):
-        """
-        Saves the new data to the specified file, appending if the file exists.
-        Args:
-            data (pd.DataFrame): The new data to save.
-        """
-<u>Purpose</u>: Saves the new data to the CSV file, appending if the file already exists.
+#### 3. `upload_df()`
 
-<u>Logic</u>: If the file already contains data, it appends new data to it, ensuring no duplicates are added by using Review ID as a unique identifier.
+```python
+def upload_df(self, bucket_name: str, object_key: str, df: pd.DataFrame):
+    """
+    Uploads the given DataFrame as CSV to S3 at `s3://{bucket_name}/{object_key}`.
+    - Skips if df is None or empty.
+    """
+```
 
-<u>Error Handling</u>: Handles cases where the file is missing by creating a new file.
+It serializes `df.to_csv()` into an in-memory buffer and put the object, i.e. uploads to S3 bucket.  
+Prints a warning if the DataFrame is empty; prints the S3 path on success.
 
-<h4>4. Method: incremental_load</h4>
+#### 4. `download_df()`
 
-    def incremental_load(self, new_data):
-        """
-        Perform incremental load by checking for new data and appending it.
-        Args:
-            new_data (pd.DataFrame): The new data to load incrementally.
-        """
-        
-<u>Purpose</u>: Manages the incremental load of data by checking for new records and appending them to the existing dataset.
+```python
+def download_df(self, bucket_name: str, stat_type: str) -> Optional[pd.DataFrame]:
+    """
+    Downloads a single stats CSV from:
+      s3://{bucket_name}/{player_name}/{data_type}/{<stat_type>_stats.csv}
+    and returns it as a pandas.DataFrame, or None on error.
+    """
+```
 
-<u>Logic</u>: Calls the save_data method to append the new data. The main purpose of this method is to ensure that only new data is added during incremental scraping sessions.
+For this function, __`stat_type`__ must be one of: ["batting", "bowling", "fielding", "allround", "personal_info"].
 
-<h3> How to Use the <code>DataLoader</code> Class </h3> 
+It builds the object key from player name, data type, and a lookup map.
+Reads the S3 object body, decodes to UTF-8, and implements `pd.read_csv()` from a StringIO.  
+Prints the S3 path on success.
 
-<ol> 
-<li><b>Initialize the DataLoader:</b></li>
+#### 5. `load_data()`
 
-    file_path = "scraped_reviews.csv"
-    loader = DataLoader(file_path)
+```python
+def load_data(self, bucket_name: str, load_type: str, stat_type: str = "all"):
+    """
+    High-level method for upload/download of one or all stat types.
+    Args:
+      bucket_name: your S3 bucket name
+      load_type:   "upload" or "download"
+      stat_type:   "all" or any single stat_type (batting, bowling, etc.)
+    """
+```
+__Flow:__
 
-<li><b>Load Existing Data (if any):</b></li> 
+1. It Validates load_type [upload, download] and stat_type [all, batting, bowling, fielding, allround, personal_info]. 
+2. It then calls ensure_bucket_exists(bucket_name).
+3. On upload only, if the bucket is missing, it will be created. Else, nothing. 
+4. For upload: iterate through each non-None DataFrame attribute (battingstats, bowlingstats, etc.) and call `upload_df()`.
+5. For download: call `download_df()` for each requested stat type and assign back to the corresponding class attribute.
 
-<ol type=I> 
-<li>Load all existing data from the file:</li>
+### Usage Example 
 
-        existing_data = loader.load_existing_data()
-        print(existing_data.head())
+```python
+from loader import LoadData
 
-<li>Incremental Loading of New Data:</li> 
+# 1. Scrape or generate your DataFrames
+player = "Virat Kohli"
+raw_loader = LoadData(player, data_type="raw")
+raw_loader.battingstats = scraped_batting_df
+raw_loader.bowlingstats = scraped_bowling_df
+# … assign other stats …
 
-<ol type=a> 
-<li>After scraping new data, perform incremental loading:</li>
-    
-    loader.incremental_load(new_data)
-</ol> 
-</ol>
+# 2. Upload raw data to S3
+raw_loader.load_data(bucket_name="cricketer-stats", load_type="upload", stat_type="all")
 
-<b>Example:</b>
+# 3. Later, download raw data back into memory
+raw_loader = LoadData(player, data_type="raw")
+raw_loader.load_data(bucket_name="cricketer-stats", load_type="download", stat_type="all")
+print(raw_loader.battingstats.head())
+```
 
-<code>
 
-import pandas as pd
-from loader import DataLoader
 
-<raw style="color:green"> # Create the DataLoader object </raw>
-file_path = "scraped_reviews.csv"
-loader = DataLoader(file_path)
 
-<raw style="color:green"> # Simulate new data scraped </raw>
-new_data = pd.DataFrame({
-    'Review ID': [101, 102, 103],
-    'Review Title': ['Great flight', 'Comfortable seats', 'Good service'],
-    'Review Meta': ['USA', 'UK', 'Canada'],
-    'Reviews': ['Excellent experience', 'Very comfortable', 'Nice crew'],
-    # Add more columns as necessary
-})
 
-<raw style="color:green"> # Perform incremental load</raw>
-loader.incremental_load(new_data)
 
-</code>
 
-<i><b>Additional Notes:</b></i>
 
-1. <u>Error Handling</u>: The script handles missing files by creating a new one. It also prevents duplicates by checking the Review ID.
-2. <u>Scalability</u>: This script is flexible and can scale with larger datasets as it uses pandas to efficiently append data and handle large volumes.
-3. <u>Data Integrity</u>: The use of a primary key (Review ID) ensures that data integrity is maintained across incremental loading.
+
+
+
+

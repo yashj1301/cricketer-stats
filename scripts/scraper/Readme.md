@@ -1,92 +1,156 @@
 ## Documentation for `scraper.py`
 
 ### Overview
-The `scraper.py` script is designed to scrape cricket player statistics from ESPN CricInfo. It extracts the player's batting, bowling, all-rounder, and fielding stats along with personal information such as the player's country, age, and playing role. This script uses **Selenium** for web scraping, running in _headless mode_ for efficiency.
 
-### Features
-- Scrapes player statistics for batting, bowling, all-round performance, and fielding.
-- Extracts personal information about the player like full name, age, country, and playing role.
-- Uses Selenium WebDriver in headless mode for silent and efficient web scraping.
+The `scraper.py` module defines the **`ScrapeData`** class (alias for `Cricketer_Stats_Scraper`), which automates extraction of a player’s statistics and personal info from ESPN CricInfo using Selenium.
 
-## Requirements
-- Python 3.x
-- Libraries:
-  - `selenium`
-  - `webdriver-manager`
-  - `pandas`
-- Google Chrome installed with the corresponding version of Chromedriver.
+---
 
-The libraries can also be found in the `requirements.txt` file in the root project folder. 
-  
-Install the required libraries using pip:
-        
-        pip install selenium webdriver-manager pandas
+### Requirements
 
-### Usage
-1. Initialize the `Cricketer_Stats_Scraper` class with the player's name.
-2. Fetch the desired stats by calling `get_player_stats()`.
-3. Access the scraped data in the `battingstats`, `bowlingstats`, `allroundstats`, `fieldingstats`, and player_info variables.
+- **time** (standard library)  
+- **pandas**  
+- **selenium**  
+- **webdriver_manager**  
+- **undetected_chromedriver** (if used)  
 
-#### Example usage
+Make sure you have a compatible ChromeDriver installed or let `webdriver_manager` install it automatically.
 
-    from scraper import Cricketer_Stats_Scraper
+---
 
-#### Initialize the scraper for a specific player
-    scraper = Cricketer_Stats_Scraper("Virat Kohli")
+### Class Definition
 
-#### Fetch all stats (batting, bowling, fielding, all-round)
-    scraper.get_player_stats(stats_type="all")
+```python
+class ScrapeData:
+    def __init__(self, player_name: str): ...
+    def get_player_url(self) -> None: ...
+    def extract_inns_data(self, record_type: str) -> pd.DataFrame: ...
+    def extract_player_info(self) -> pd.DataFrame: ...
+    def get_player_stats(self, stats_type: str = "all") -> None: ...
+    def __del__(self) -> None: ...
+```
 
-#### Print the fetched data
-    print("Batting Stats:", scraper.battingstats)
-    print("Bowling Stats:", scraper.bowlingstats)
-    print("Allround Stats:", scraper.allroundstats)
-    print("Fielding Stats:", scraper.fieldingstats)
+#### 1. Constructor
 
-#### Access personal player info
-    print("Player Info:", scraper.player_info)
+```python
+def __init__(self, player_name: str):
+    """
+    Initializes the ScrapeData object.
+    - Stores `player_name`.
+    - Launches a headless Chrome WebDriver.
+    - Automatically calls `get_player_url()` to populate:
+        - self.player_url
+        - self.player_id
+    """
+```
+__Parameters__
 
-### Methods
+`player_name` (str): Full name of the cricketer to scrape.
 
-1. __`__init__(self,player_name)`__
+__Extras__
 
-__Description__: Initializes the `Cricketer_Stats_Scraper` object with the player's name. Sets up the WebDriver, and automatically calls `get_player_url()` to fetch the player's URL and ID.
+calls `get_player_url()` to fetch player id and player url as soon as object is created. 
 
-__Parameters__:
-- `player_name (str)`: The name of the cricketer whose stats will be scraped.
 
-__Returns__: None; updates the instance variables `player_id` and `player_url`. 
+#### 2. `get_player_url(self)`
 
-2. __`get_player_url()`__
+```python
+def get_player_url(self) -> None:
+    """
+    Searches ESPN CricInfo for `self.player_name`,
+    extracts the first matching profile URL and player ID.
+    Updates:
+      - self.player_url (str)
+      - self.player_id  (str)
+    """
+```
 
-__Description__: Extracts the player URL and player ID by searching the player's name on ESPN CricInfo.
+It extracts the player url and player id from the website, and stores to instance variables. 
 
-__Returns__: None, updates the `player_url` and `player_id` instance variables.
+#### 3. `extract_inns_data(self, record_type)`
 
-3. __`extract_inns_data(record_type)`__
+```python
+def extract_inns_data(self, record_type: str) -> pd.DataFrame:
+    """
+    Scrapes innings-level stats for the given `record_type`.
+    Args:
+      record_type (str): One of "batting", "bowling", "fielding", "allround".
+    Returns:
+      pd.DataFrame: Tabular stats for each innings, with columns like "Runs", "Overs", etc.
+    """
+```
 
-__Description__: Scrapes innings data (batting, bowling, fielding, or all-round stats) for the player based on the provided record_type.
+1. Builds the URL for the desired stats view.
+2. Parses table headers and rows via Selenium.
+3. Returns a DataFrame with a final “Match ID” column.
 
-__Parameters__: 
-- `record_type (str)` - Type of stats to scrape ("batting","bowling","fielding", "allround").
+#### 4. `extract_player_info(self)`
 
-__Returns__: A pandas DataFrame containing the player's innings data, based on record type.
+```python
+def extract_player_info(self) -> pd.DataFrame:
+    """
+    Visits the player profile page (`self.player_url`) and extracts
+    personal details (name, country, age, playing role).
+    Returns:
+      pd.DataFrame: Single-row DataFrame with columns "Player ID", "Player URL", plus other personal info fields.
+    """
+```
 
-4. __`extract_player_info()`__
+Returns DataFrame of personal info for the player (or None on failure).
 
-__Description__: Extracts the personal information of the player (full name, country, age, and playing role).
+#### 5. `get_player_stats(self, stats_type="all")`
 
-__Returns__: A pandas DataFrame containing the player's personal information.
+```python
+def get_player_stats(self, stats_type: str = "all") -> None:
+    """
+    Orchestrates the full scraping process.
+    Args:
+      stats_type (str):  
+        - "batting", "bowling", "fielding", "allround", "personal_info", or "all" (default).
+    Behavior:
+      - Calls `extract_player_info()` if needed.
+      - Calls `extract_inns_data()` for each requested stat.
+      - Exports each DataFrame to CSV if `export=True`.
+    Updates:
+      - self.battingstats, self.bowlingstats, self.fieldingstats,
+        self.allroundstats, self.player_info
+    """
+```
 
-5. __`get_player_stats(stats_type="all")`__
+This is the high-level method used in the driver functions to put everything in motion. After the object is created, the data scraping command is given through this method and its `stat_type` argument. 
 
-___Description__: Fetches stats based on the stats_type argument.
+#### 6. Destructor
 
-__Parameters__: 
-- `stats_type (str)` - Stats to fetch. Can be "batting", "bowling", "allround", "fielding", or "all" to fetch all stats (default).
+```python
+def __del__(self) -> None:
+    """
+    Destructor: ensures the Selenium WebDriver is cleanly closed
+    when the scraper object is garbage-collected.
+    """
+```
 
-__Returns__: None; updates the instance variables `battingstats`, `bowlingstats`, `allroundstats`, `fieldingstats`, and `player_info`.
+This prevents orphaned ChromeDriver processes by calling `self.driver.quit()`.
 
-6.__` __del__()`__
+### Usage Example
 
-__Description__: Destructor of the class. It cleans up the WebDriver instance after the scraping process is complete by closing the browser window.
+```python
+from scripts.scraper.scraper import ScrapeData
+
+# 1. Initialize and fetch URL, player ID
+scraper = ScrapeData("Virat Kohli")
+
+# 2. Scrape all stats (batting, bowling, fielding, allround, personal info)
+scraper.get_player_stats("all")
+
+# 3. Access the DataFrames
+print(scraper.battingstats.head())
+print(scraper.bowlingstats.head())
+print(scraper.player_info)
+```
+
+
+
+
+
+
+

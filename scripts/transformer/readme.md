@@ -1,125 +1,145 @@
-<u><h2>Documentation for loader.py</h2></u>
+## Documentation for `transformer.py`
 
-<h3>Overview</h3>
+### Overview
 
-The `loader.py` script defines the **DataLoader** class, which handles incremental data loading. It is responsible for loading, saving, and appending new review data to a CSV file, ensuring that there are no duplicate records. It performs the following tasks:
+The `transformer.py` module defines the **`TransformData`** class, which cleans and casts raw cricketer innings data into analysis-ready tables. It handles value replacements, column extraction, renaming, date parsing, ID formatting, and explicit dtype casting.
 
-1. Checks if an existing data file is available.
-2. Loads existing data if present.
-3. Saves new data to the file, ensuring that only new records are appended.
-4. Handles the case where the data file does not exist, creating a new file.
+---
 
-<h3>Requirements</h3> 
+### Requirements
 
-The following Python libraries are required:
-- `pandas`: For data manipulation and reading/writing CSV files.
-- `os`: For checking file existence.
+- **time** (standard library)  
+- **pandas**  
+- **numpy**
 
-<h3>Class Definition</h3>
-class DataLoader: The class encapsulates the logic for loading and saving review data.
+---
 
-<h4>1. Class Constructor</h4>
+### Class Definition
 
-    def __init__(self, file_path):
+```python
+class TransformData:
+    def __init__(self, player_name: str): …
+    def transform_data(self, df: pd.DataFrame) -> pd.DataFrame: …
+    def final_df(self,
+                 df: pd.DataFrame,
+                 common_cols: list,
+                 custom_cols: list) -> pd.DataFrame: …
+    def process_data(self, type: str = "all") -> None: …
+```
+
+#### 1. Constructor
+
+```python
+def __init__(self, player_name: str):
     """
-    Initializes the DataLoader with the file path to save/load data.
     Args:
-    file_path (str): The path to the CSV file where data will be saved.
+      player_name: full name of the cricketer (e.g. "Virat Kohli").
+    Side-effects:
+      - Sets `self.player_name`.
+      - Initializes placeholders: `player_info`, `battingstats`,
+        `bowlingstats`, `fieldingstats`, `allroundstats`,
+        `player_id`, `player_url` to None.
     """
-    
-<u>Purpose</u>: Sets up the initial state for the data loader, including file_path: Path to the CSV file for saving/loading data.
+```
 
-<h4>2. Method: load_existing_data</h4>
+Establishes the object’s state; we must later assign raw DataFrames to the stats attributes before calling `process_data()`.
 
-        def load_existing_data(self):
-        """
-        Loads existing data from the specified file if it exists.
-        Returns:
-            pd.DataFrame: Existing data (empty DataFrame if file doesn't exist).
-        """
-<u>Purpose</u>: Loads the existing data from the specified CSV file. If the file doesn't exist, it returns an empty DataFrame.
+#### 2. transform_data(self, df)
 
-<u>Logic</u>: Checks if the file exists and reads it into a DataFrame. If no file is found, an empty DataFrame is returned.
+```python
+def transform_data(self, df: pd.DataFrame) -> pd.DataFrame:
+    """
+    Cleans one raw stats table:
+      1. Replaces missing-value tokens (e.g. "*", "DNB", "-", "sub") with NaN.
+      2. Splits “Opposition” into `Format` and `Opposition` columns.
+      3. Normalizes certain ground names and renames to `Location`.
+      4. Casts `Start Date` to datetime64.
+      5. Prefixes match numbers with “#” and renames to `Match ID`.
+    Returns:
+      A cleaned DataFrame.
+    """
+```
 
-<h4>3. Method: save_data</h4>
+__Parameters:__
 
-    def save_data(self, data):
-        """
-        Saves the new data to the specified file, appending if the file exists.
-        Args:
-            data (pd.DataFrame): The new data to save.
-        """
-<u>Purpose</u>: Saves the new data to the CSV file, appending if the file already exists.
+`df`: raw innings DataFrame (must contain columns: Opposition, Ground, Start Date, Match id).
 
-<u>Logic</u>: If the file already contains data, it appends new data to it, ensuring no duplicates are added by using Review ID as a unique identifier.
+__Returns:__ new DataFrame after all five transformation steps.
 
-<u>Error Handling</u>: Handles cases where the file is missing by creating a new file.
+#### 3. final_df(self, df, common_cols, custom_cols)
 
-<h4>4. Method: incremental_load</h4>
+```python
+def final_df(self,
+             df: pd.DataFrame,
+             common_cols: list,
+             custom_cols: list) -> pd.DataFrame:
+    """
+    Applies `transform_data()`, selects and reorders columns, and casts dtypes.
+    Args:
+      common_cols: list of columns present in every stats table
+        (e.g. ['Match ID','Start Date','Format','Inns','Opposition','Location'])
+      custom_cols: list of stats-specific columns
+        (e.g. batting: ['Pos','Runs','BF',…])
+    Behavior:
+      - Cleans via `transform_data()`.
+      - Reorders to: common_cols[:-2] + custom_cols + common_cols[-2:].
+      - Casts each column to a pre-defined dtype mapping (Int64, float64, etc.).  
+      - Logs any casting failures per column.
+    Returns:
+      The typed, trimmed DataFrame ready for analysis.
+    """
+```
 
-    def incremental_load(self, new_data):
-        """
-        Perform incremental load by checking for new data and appending it.
-        Args:
-            new_data (pd.DataFrame): The new data to load incrementally.
-        """
-        
-<u>Purpose</u>: Manages the incremental load of data by checking for new records and appending them to the existing dataset.
+__Parameters:__
 
-<u>Logic</u>: Calls the save_data method to append the new data. The main purpose of this method is to ensure that only new data is added during incremental scraping sessions.
+1. `df`: cleaned DataFrame. ready for data type casting.
+2. `common_cols`: always-present fields.
+3. `custom_cols`: fields specific to batting, bowling, etc.
 
-<h3> How to Use the <code>DataLoader</code> Class </h3> 
+__Returns:__ a fully cleaned & typed DataFrame.
 
-<ol> 
-<li><b>Initialize the DataLoader:</b></li>
+#### 4. process_data(self, type="all")
 
-    file_path = "scraped_reviews.csv"
-    loader = DataLoader(file_path)
+```python
+def process_data(self, type: str = "all") -> None:
+    """
+    Drives end-to-end transformation for one or all stat types.
+    Args:
+      type: one of "batting","bowling","fielding","allround","all"
+    Side-effects:
+      - Prints processing status.
+      - For each requested type, calls `final_df()` and assigns to
+        self.battingstats, self.bowlingstats, self.fieldingstats,
+        self.allroundstats.
+      - Checks `self.player_info` for “allround” role before processing.
+    """
+```
 
-<li><b>Load Existing Data (if any):</b></li> 
+__Behavior:__
 
-<ol type=I> 
-<li>Load all existing data from the file:</li>
+1. Defines column lists for each stat type.
+2. For each selected type or “all”, processes the corresponding DataFrame.
+3. Prints success or error messages.
 
-        existing_data = loader.load_existing_data()
-        print(existing_data.head())
+### Usage Example 
 
-<li>Incremental Loading of New Data:</li> 
+```python
+from scripts.transformer.transformer import TransformData
 
-<ol type=a> 
-<li>After scraping new data, perform incremental loading:</li>
-    
-    loader.incremental_load(new_data)
-</ol> 
-</ol>
+# 1. Instantiate
+tf = TransformData("Virat Kohli")
 
-<b>Example:</b>
+# 2. Assign your downloaded raw DataFrames:
+tf.player_info    = raw_player_info_df
+tf.battingstats   = raw_batting_df
+tf.bowlingstats   = raw_bowling_df
+tf.fieldingstats  = raw_fielding_df
+tf.allroundstats  = raw_allround_df  # optional
 
-<code>
+# 3. Run full transformation
+tf.process_data(type="all")
 
-import pandas as pd
-from loader import DataLoader
-
-<raw style="color:green"> # Create the DataLoader object </raw>
-file_path = "scraped_reviews.csv"
-loader = DataLoader(file_path)
-
-<raw style="color:green"> # Simulate new data scraped </raw>
-new_data = pd.DataFrame({
-    'Review ID': [101, 102, 103],
-    'Review Title': ['Great flight', 'Comfortable seats', 'Good service'],
-    'Review Meta': ['USA', 'UK', 'Canada'],
-    'Reviews': ['Excellent experience', 'Very comfortable', 'Nice crew'],
-    # Add more columns as necessary
-})
-
-<raw style="color:green"> # Perform incremental load</raw>
-loader.incremental_load(new_data)
-
-</code>
-
-<i><b>Additional Notes:</b></i>
-
-1. <u>Error Handling</u>: The script handles missing files by creating a new one. It also prevents duplicates by checking the Review ID.
-2. <u>Scalability</u>: This script is flexible and can scale with larger datasets as it uses pandas to efficiently append data and handle large volumes.
-3. <u>Data Integrity</u>: The use of a primary key (Review ID) ensures that data integrity is maintained across incremental loading.
+# 4. Inspect outputs
+print(tf.battingstats.dtypes)
+print(tf.battingstats.head())
+```
