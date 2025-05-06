@@ -1,7 +1,6 @@
 pandas
 numpy
 selenium
-webdriver-manager
 undetected-chromedriver
 boto3
 python-dotenv

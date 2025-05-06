@@ -11,7 +11,6 @@ The `scraper.py` module defines the **`ScrapeData`** class (alias for `Cricketer
 - **time** (standard library)  
 - **pandas**  
 - **selenium**  
-- **webdriver_manager**  
 - **undetected_chromedriver**  
 
 Make sure to have a compatible ChromeDriver installed or let `webdriver_manager` install it automatically.

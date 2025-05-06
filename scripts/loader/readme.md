@@ -1,146 +1,157 @@
-## Documentation for `loader.py`
+## 📦 `loader.py` Module Documentation
 
 ### Overview
 
-The `loader.py` script defines the **`LoadData`** class, which manages uploading and downloading of cricketer statistics to and from an AWS S3 bucket. It supports both raw and transformed data, and will create the target bucket on upload if it does not already exist.
+The `loader.py` module defines the `LoadData` class, which is responsible for uploading and downloading cricketer statistics to and from AWS S3. This class abstracts the S3 interactions and enables modular loading and storage of player-level and master-level datasets.
+
+It supports the following workflows:
+
+* Uploading raw or transformed player data to S3.
+* Downloading existing raw or transformed data from S3.
+* Uploading and downloading master datasets.
+* Conditional downloading of allrounder stats based on player's role.
+
+It also ensures that the necessary bucket exists before uploading and builds correct object keys based on the player and context.
 
 ---
 
 ### Requirements
 
-- **pandas**  
-- **boto3**  
-- **python-dotenv**  
-- **io** (standard library)  
-- **os** (standard library)
+* `pandas`: For DataFrame handling.
+* `boto3`: AWS SDK for Python.
+* `python-dotenv`: To load AWS credentials from `.env` file.
+* `io.StringIO`: To convert DataFrames to in-memory CSV buffers.
+* `os`: For accessing environment variables.
 
-Make sure to have a `.env` file (git-ignored) in the project root with:
-```bash
-AWS_ACCESS_KEY_ID=...
-AWS_SECRET_ACCESS_KEY=...
-AWS_DEFAULT_REGION=...
-```
-and call `load_dotenv()` before using boto3.
+### Environment Setup
 
-### Class Definition
-```python
-class LoadData:
-    def __init__(self, player_name: str, data_type: str = "raw"):
-        ...
-    def ensure_bucket_exists(self, bucket_name: str, flag: int):
-        ...
-    def upload_df(self, bucket_name: str, object_key: str, df: pd.DataFrame):
-        ...
-    def download_df(self, bucket_name: str, stat_type: str) -> Optional[pd.DataFrame]:
-        ...
-    def load_data(self, bucket_name: str, load_type: str, stat_type: str = "all"):
-        ...
+The AWS credentials must be stored in a `.env` file in the root directory with the following format:
+
+```env
+AWS_ACCESS_KEY_ID=your_aws_key
+AWS_SECRET_ACCESS_KEY=your_aws_secret
+AWS_DEFAULT_REGION=ap-south-1
 ```
-#### 1. Constructor
+
+---
+
+### Class: `LoadData`
 
 ```python
-def __init__(self, player_name: str, data_type: str = "raw"):
-    """
-    Args:
-      player_name: e.g. "Virat Kohli" (will be normalized to lowercase/underscores)
-      data_type:   "raw" or "tf" (transformed)
-    """
+LoadData(player_name: str, data_type: str, master: bool = False)
 ```
 
-It stores the player name and data type ("raw" or transformed, i.e. "tf"), initialize placeholders for each stats DataFrame.
+#### Arguments:
 
-#### 2. `ensure_bucket_exists()`
+* `player_name` (str): Name of the player (e.g., "Virat Kohli"). Converted internally to lowercase and underscores.
+* `data_type` (str): Type of data, either `"raw"` or `"tf"`.
+* `master` (bool): Flag to handle master-level datasets. If `True`, uses the `master/` directory inside the S3 bucket.
 
-```python
-def ensure_bucket_exists(self, bucket_name: str, flag: int):
-    """
-    - Checks if `bucket_name` exists in S3.
-    - On upload (checked through flag = 1), if missing, creates it in AWS_DEFAULT_REGION.
-    """
-```
+#### Attributes:
 
-It calls `s3.head_bucket()` to check bucket existence. If a __404/NoSuchBucket__ error is returned, it calls `s3.create_bucket()` with the region from `AWS_DEFAULT_REGION` only on upload (this is checked through flag=1); Otherwise re-raises unexpected errors.
+The following attributes store the loaded DataFrames:
 
-#### 3. `upload_df()`
+* `battingstats`, `bowlingstats`, `fieldingstats`, `allroundstats`: Statistic-specific DataFrames.
+* `player_info`: DataFrame with personal details.
 
-```python
-def upload_df(self, bucket_name: str, object_key: str, df: pd.DataFrame):
-    """
-    Uploads the given DataFrame as CSV to S3 at `s3://{bucket_name}/{object_key}`.
-    - Skips if df is None or empty.
-    """
-```
+---
 
-It serializes `df.to_csv()` into an in-memory buffer and put the object, i.e. uploads to S3 bucket.  
-Prints a warning if the DataFrame is empty; prints the S3 path on success.
+### Methods
 
-#### 4. `download_df()`
+#### 1. `get_object_key(stat_type: str) -> str`
 
-```python
-def download_df(self, bucket_name: str, stat_type: str) -> Optional[pd.DataFrame]:
-    """
-    Downloads a single stats CSV from:
-      s3://{bucket_name}/{player_name}/{data_type}/{<stat_type>_stats.csv}
-    and returns it as a pandas.DataFrame, or None on error.
-    """
-```
+Returns the object key (S3 file path) for a given stat type, customized by player and `data_type`, or under `master/` for master datasets.
 
-For this function, __`stat_type`__ must be one of: ["batting", "bowling", "fielding", "allround", "personal_info"].
+Examples:
 
-It builds the object key from player name, data type, and a lookup map.
-Reads the S3 object body, decodes to UTF-8, and implements `pd.read_csv()` from a StringIO.  
-Prints the S3 path on success.
+* For player-specific data: `virat_kohli/tf/batting_stats.csv`
+* For master datasets: `master/batting_stats.csv`
 
-#### 5. `load_data()`
+---
 
-```python
-def load_data(self, bucket_name: str, load_type: str, stat_type: str = "all"):
-    """
-    High-level method for upload/download of one or all stat types.
-    
-    Args:
-      bucket_name: the S3 bucket name
-      load_type:   "upload" or "download"
-      stat_type:   "all" or any single stat_type (batting, bowling, etc.)
-    """
-```
-__Flow:__
+#### 2. `ensure_bucket_exists(bucket_name: str, flag: int = 0)`
 
-1. It Validates load_type [upload, download] and stat_type [all, batting, bowling, fielding, allround, personal_info]. 
-2. It then calls `ensure_bucket_exists(bucket_name)`.
-3. On upload only, if the bucket is missing, it will be created. Else, nothing. 
-4. For upload: iterate through each non-None DataFrame attribute (battingstats, bowlingstats, etc.) and call `upload_df()`.
-5. For download: call `download_df()` for each requested stat type and assign back to the corresponding class attribute.
+Checks if the bucket exists. If not, creates the bucket **only if** `flag = 1`. Used internally in upload operations to avoid redundant creation.
 
-### Usage Example 
+---
+
+#### 3. `upload_df(bucket_name: str, stat_type: str, df: pd.DataFrame)`
+
+Uploads a specific DataFrame as a CSV to S3.
+
+* Automatically builds the correct object key.
+* Skips upload if the DataFrame is empty or `None`.
+* Logs the upload path for verification.
+
+---
+
+#### 4. `download_df(bucket_name: str, stat_type: str) -> pd.DataFrame | None`
+
+Downloads a CSV file from S3, converts it to a DataFrame.
+
+* If the file exists and is valid, returns the DataFrame.
+* If not found or error occurs, prints the error and returns `None`.
+
+---
+
+#### 5. `load_data(bucket_name: str, load_type: str, stat_type: str = "all")`
+
+High-level controller for loading or uploading one or more datasets.
+
+**Arguments:**
+
+* `bucket_name`: S3 bucket name.
+* `load_type`: One of `"upload"` or `"download"`.
+* `stat_type`: One of `"all"`, `"batting"`, `"bowling"`, `"fielding"`, `"allround"`, or `"personal_info"`.
+
+Performs upload/download on each component based on available data.
+
+---
+
+### 🔁 Special Logic for Allrounders
+
+When downloading `allround_stats.csv`, special handling is done:
+
+* For **player-level** (i.e., `master=False`):
+
+  * If `player_info` is not present, attempts to fetch it.
+  * If player's "PLAYING ROLE" is `"Allrounder"`, proceeds with downloading.
+  * If not an allrounder, skips with a warning.
+
+* For **master-level** (i.e., `master=True`):
+
+  * Skips allrounder role check and attempts download directly.
+
+---
+
+### ✅ Example Usage
 
 ```python
 from loader import LoadData
 
-# 1. Scrape or generate your DataFrames
-player = "Virat Kohli"
-raw_loader = LoadData(player, data_type="raw")
-raw_loader.battingstats = scraped_batting_df
-raw_loader.bowlingstats = scraped_bowling_df
-# … assign other stats …
+# Download transformed data
+loader = LoadData("Virat Kohli", data_type="tf")
+loader.load_data("cricketer-stats", load_type="download", stat_type="all")
+print(loader.battingstats.head())
 
-# 2. Upload raw data to S3
-raw_loader.load_data(bucket_name="cricketer-stats", load_type="upload", stat_type="all")
+# Upload transformed data
+loader = LoadData("Virat Kohli", data_type="tf")
+loader.battingstats = transformed_batting_df
+loader.player_info = player_info_df
+loader.load_data("cricketer-stats", load_type="upload", stat_type="all")
 
-# 3. Later, download raw data back into memory
-raw_loader = LoadData(player, data_type="raw")
-raw_loader.load_data(bucket_name="cricketer-stats", load_type="download", stat_type="all")
-print(raw_loader.battingstats.head())
+# Handle master dataset
+master_loader = LoadData(data_type="tf", master=True)
+master_loader.battingstats = full_batting_df
+master_loader.load_data("cricketer-stats", load_type="upload", stat_type="batting")
 ```
 
+---
 
+### Notes
 
+* This class is meant to be used inside DAGs or automated jobs.
+* Safe guards are in place to skip empty DataFrames.
+* Print statements provide traceability for uploads/downloads.
 
-
-
-
-
-
-
-
-
+This module provides a clean interface for integrating cloud storage with your local pipeline logic, while ensuring modular expansion and player-wise data control.
