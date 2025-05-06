@@ -8,7 +8,6 @@ The `transformer.py` module defines the **`TransformData`** class, which cleans 
 
 ### Requirements
 
-- **time** (standard library)  
 - **pandas**  
 - **numpy**
 
